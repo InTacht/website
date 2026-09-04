@@ -104,8 +104,45 @@
   }
 
   .frontier-lattice {
-    opacity: 0.85;
-    animation: frontier-lattice-breathe 7.5s ease-in-out infinite;
+    opacity: 1;
+  }
+
+  .frontier-net-drift {
+    animation: frontier-net-drift 14s ease-in-out infinite;
+    transform-box: view-box;
+    transform-origin: 70% 50%;
+  }
+
+  .frontier-net-edge {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.28);
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke-dasharray: 5 10;
+    animation: frontier-net-flow 3.2s linear infinite;
+  }
+
+  .frontier-net-node-core {
+    fill: rgba(255, 255, 255, 0.72);
+  }
+
+  .frontier-net-node {
+    animation: frontier-net-pulse 2.8s ease-in-out infinite;
+  }
+
+  .frontier-net-node.is-hot {
+    animation: frontier-net-hot 2.2s ease-in-out infinite;
+  }
+
+  .frontier-net-node.is-hot .frontier-net-node-core {
+    fill: rgba(251, 146, 60, 0.9);
+  }
+
+  .frontier-net-hot-halo {
+    fill: rgba(239, 68, 68, 0.18);
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: frontier-net-halo 2.2s ease-in-out infinite;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -118,20 +155,66 @@
       display: none;
     }
 
-    .frontier-lattice {
+    .frontier-net-drift,
+    .frontier-net-edge,
+    .frontier-net-node,
+    .frontier-net-node.is-hot,
+    .frontier-net-hot-halo {
       animation: none;
-      opacity: 0.8;
+    }
+
+    .frontier-net-edge {
+      stroke-dasharray: none;
+      stroke: rgba(255, 255, 255, 0.22);
     }
   }
 }
 
-@keyframes frontier-lattice-breathe {
+@keyframes frontier-net-drift {
   0%,
   100% {
-    opacity: 0.72;
+    transform: translate(0, 0);
   }
   50% {
-    opacity: 0.95;
+    transform: translate(-6px, 4px);
+  }
+}
+
+@keyframes frontier-net-flow {
+  to {
+    stroke-dashoffset: -30;
+  }
+}
+
+@keyframes frontier-net-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes frontier-net-hot {
+  0%,
+  100% {
+    opacity: 0.75;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes frontier-net-halo {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.15);
   }
 }
 
