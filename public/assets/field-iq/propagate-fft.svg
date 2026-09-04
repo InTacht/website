@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" fill="none">
+  <path d="M40 220 C90 80, 140 280, 190 160 C240 40, 290 240, 340 140 C390 40, 430 200, 440 180" stroke="#00F0FF" stroke-width="2" stroke-opacity="0.85"/>
+  <path d="M40 260 C100 200, 150 300, 210 230 C270 160, 320 280, 380 210 C420 170, 440 230, 440 220" stroke="#6366F1" stroke-width="1.5" stroke-opacity="0.55"/>
+  <text x="240" y="320" text-anchor="middle" fill="#A5F3FC" font-size="14" font-family="system-ui">FFT wave kernel</text>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none">
+  <rect width="640" height="400" rx="16" fill="#0D0E15"/>
+  <text x="32" y="40" fill="rgba(255,255,255,0.75)" font-size="15" font-family="system-ui" font-weight="500">MQAR Recall Performance</text>
+  <text x="32" y="62" fill="rgba(255,255,255,0.35)" font-size="12" font-family="system-ui">Multi-Query Associative Recall</text>
+  <line x1="72" y1="320" x2="580" y2="320" stroke="rgba(255,255,255,0.12)"/>
+  <line x1="72" y1="88" x2="72" y2="320" stroke="rgba(255,255,255,0.12)"/>
+  <text x="52" y="96" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">100%</text>
+  <text x="58" y="208" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">50%</text>
+  <text x="64" y="324" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">0</text>
+  <!-- Standard Attention 100% -->
+  <path d="M100 100 L200 100 L300 102 L400 101 L520 100" stroke="rgba(255,255,255,0.55)" stroke-width="2.5"/>
+  <circle cx="520" cy="100" r="5" fill="rgba(255,255,255,0.7)"/>
+  <!-- Wave Fields 25% -->
+  <path d="M100 100 L180 180 L260 230 L360 255 L520 262" stroke="#6366F1" stroke-width="2.5" stroke-opacity="0.85"/>
+  <circle cx="520" cy="262" r="5" fill="#6366F1"/>
+  <!-- Grassmann Memory 97.1% -->
+  <path d="M100 100 L200 108 L300 112 L400 110 L520 107" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/>
+  <circle cx="520" cy="107" r="5" fill="#fff"/>
+  <g font-family="system-ui" font-size="12">
+    <rect x="90" y="340" width="10" height="10" rx="2" fill="rgba(255,255,255,0.55)"/>
+    <text x="108" y="349" fill="rgba(255,255,255,0.55)">Standard Attention · 100%</text>
+    <rect x="290" y="340" width="10" height="10" rx="2" fill="#6366F1"/>
+    <text x="308" y="349" fill="rgba(255,255,255,0.55)">Wave Fields · 25%</text>
+    <rect x="460" y="340" width="10" height="10" rx="2" fill="#fff"/>
+    <text x="478" y="349" fill="rgba(255,255,255,0.7)">Grassmann · 97.1%</text>
+  </g>
+</svg>

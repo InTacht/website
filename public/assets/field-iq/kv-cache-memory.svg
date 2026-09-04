@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" fill="none">
+  <text x="40" y="40" fill="#FCA5A5" font-size="13" font-family="system-ui">Standard AI memory</text>
+  <rect x="40" y="55" width="60" height="24" rx="4" fill="#EF4444" fill-opacity="0.45"/>
+  <rect x="40" y="90" width="120" height="24" rx="4" fill="#EF4444" fill-opacity="0.55"/>
+  <rect x="40" y="125" width="200" height="24" rx="4" fill="#EF4444" fill-opacity="0.7"/>
+  <rect x="40" y="160" width="320" height="24" rx="4" fill="#EF4444" fill-opacity="0.85"/>
+  <text x="40" y="220" fill="#A5F3FC" font-size="13" font-family="system-ui">Field-IQ memory</text>
+  <rect x="40" y="235" width="200" height="24" rx="4" fill="#00F0FF" fill-opacity="0.45"/>
+  <text x="250" y="252" fill="#A5F3FC" font-size="12" font-family="system-ui">constant</text>
+</svg>

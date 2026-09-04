@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" fill="none">
+  <rect x="40" y="60" width="160" height="160" rx="8" stroke="#EF4444" stroke-opacity="0.55" stroke-width="1.5" fill="#EF4444" fill-opacity="0.06"/>
+  <path d="M56 92h32v32H56zm48 0h32v32h-32zm48 0h32v32h-32zM56 140h32v32H56zm48 0h32v32h-32zm48 0h32v32h-32zM56 188h32v32H56zm48 0h32v32h-32zm48 0h32v32h-32z" fill="#EF4444" fill-opacity="0.35"/>
+  <text x="120" y="250" text-anchor="middle" fill="#FCA5A5" font-size="14" font-family="system-ui">Matrix slots</text>
+  <circle cx="340" cy="140" r="70" stroke="#00F0FF" stroke-opacity="0.5" stroke-width="1.5" fill="#00F0FF" fill-opacity="0.05"/>
+  <circle cx="320" cy="120" r="5" fill="#00F0FF"/>
+  <circle cx="360" cy="150" r="5" fill="#00F0FF"/>
+  <circle cx="345" cy="105" r="4" fill="#6366F1"/>
+  <text x="340" y="250" text-anchor="middle" fill="#A5F3FC" font-size="14" font-family="system-ui">Continuous field</text>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" fill="none">
+  <ellipse cx="240" cy="150" rx="120" ry="70" stroke="#6366F1" stroke-opacity="0.55" stroke-width="1.5"/>
+  <ellipse cx="240" cy="150" rx="70" ry="110" stroke="#00F0FF" stroke-opacity="0.4" stroke-width="1.25" transform="rotate(25 240 150)"/>
+  <line x1="240" y1="150" x2="320" y2="95" stroke="#A5B4FC" stroke-width="1.5"/>
+  <line x1="240" y1="150" x2="180" y2="70" stroke="#A5B4FC" stroke-width="1.5"/>
+  <line x1="240" y1="150" x2="290" y2="210" stroke="#A5B4FC" stroke-width="1.5"/>
+  <circle cx="240" cy="150" r="5" fill="#00F0FF"/>
+  <text x="240" y="270" text-anchor="middle" fill="#C7D2FE" font-size="14" font-family="system-ui">Grassmannian manifold</text>
+</svg>
