@@ -7,10 +7,11 @@ import {
   StoryLead,
   StorySection,
 } from "@/components/story-primitives";
-import { AssetSlot } from "@/components/ui/asset-slot";
+import { SpatialFieldPlate } from "@/components/story-graphics/spatial-field-plate";
+import { WaveFieldPlate } from "@/components/story-graphics/wave-field-plate";
 import { GlassCard } from "@/components/ui/glass-card";
 import { ParallaxLayer } from "@/components/ui/parallax-layer";
-import { act2, fieldIqAssets } from "@/lib/field-iq-content";
+import { act2 } from "@/lib/field-iq-content";
 
 export function Act2Solution() {
   return (
@@ -33,27 +34,13 @@ export function Act2Solution() {
           <StoryBody>{act2.body}</StoryBody>
         </div>
 
-        <div className="relative">
-          <ParallaxLayer speed={-0.06} className="absolute inset-x-0 -top-8 opacity-50">
-            <AssetSlot
-              src={fieldIqAssets.spatialGrid}
-              fallbackSrc={fieldIqAssets.fallbacks.spatialGrid}
-              label="Spatial field"
-              aspect="aspect-[21/9]"
-              fit="contain"
-              className="border-0 bg-transparent shadow-none"
-            />
+        <div className="relative space-y-4">
+          <ParallaxLayer speed={-0.06}>
+            <SpatialFieldPlate />
           </ParallaxLayer>
 
           <ParallaxLayer speed={0.14}>
-            <AssetSlot
-              src={fieldIqAssets.waveVector}
-              fallbackSrc={fieldIqAssets.fallbacks.waveVector}
-              label="Continuous field waves"
-              aspect="aspect-square"
-              fit="contain"
-              className="mx-auto max-w-md"
-            />
+            <WaveFieldPlate />
           </ParallaxLayer>
         </div>
       </div>

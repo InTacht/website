@@ -1,17 +1,21 @@
 "use client";
 
+import { EnergyChartPlate } from "@/components/story-graphics/energy-chart-plate";
 import { FrontierModelPlate } from "@/components/story-graphics/frontier-model-plate";
+import {
+  HardwareChassisPlate,
+  HardwareGpuPlate,
+} from "@/components/story-graphics/hardware-stack-plate";
 import {
   StoryBody,
   StoryEyebrow,
   StoryHeadline,
   StoryLead,
 } from "@/components/story-primitives";
-import { AssetSlot } from "@/components/ui/asset-slot";
 import { GlassCard } from "@/components/ui/glass-card";
 import { MetricBadge } from "@/components/ui/metric-badge";
 import { ParallaxLayer } from "@/components/ui/parallax-layer";
-import { act1, fieldIqAssets } from "@/lib/field-iq-content";
+import { act1 } from "@/lib/field-iq-content";
 
 export function Act1Problem() {
   return (
@@ -53,35 +57,17 @@ export function Act1Problem() {
 
           <div className="relative">
             <ParallaxLayer speed={0.12}>
-              <AssetSlot
-                src={fieldIqAssets.nvidiaServer}
-                fallbackSrc={fieldIqAssets.fallbacks.nvidiaServer}
-                label="NVIDIA DGX server"
-                aspect="aspect-[16/10]"
-                fit="contain"
-              />
+              <HardwareChassisPlate />
             </ParallaxLayer>
             <div className="absolute -bottom-5 -right-1 w-[42%] md:-right-3">
               <ParallaxLayer speed={0.28}>
-                <AssetSlot
-                  src={fieldIqAssets.nvidiaGpu}
-                  fallbackSrc={fieldIqAssets.fallbacks.nvidiaGpu}
-                  label="GPU die"
-                  aspect="aspect-square"
-                  fit="contain"
-                />
+                <HardwareGpuPlate />
               </ParallaxLayer>
             </div>
           </div>
 
           <ParallaxLayer speed={0.1} className="pt-6">
-            <AssetSlot
-              src={fieldIqAssets.energyChart}
-              fallbackSrc={fieldIqAssets.fallbacks.energyChart}
-              label="Energy for Growth chart"
-              aspect="aspect-[16/9]"
-              fit="contain"
-            />
+            <EnergyChartPlate />
           </ParallaxLayer>
         </div>
       </div>

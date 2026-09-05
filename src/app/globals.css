@@ -122,27 +122,152 @@
     animation: frontier-net-flow 3.2s linear infinite;
   }
 
-  .frontier-net-node-core {
-    fill: rgba(255, 255, 255, 0.72);
+  .frontier-cube {
+    opacity: 1;
   }
 
-  .frontier-net-node {
-    animation: frontier-net-pulse 2.8s ease-in-out infinite;
+  .frontier-cube-top {
+    fill: rgba(255, 255, 255, 0.22);
+    stroke: rgba(255, 255, 255, 0.42);
+    stroke-width: 0.7;
+    transition:
+      fill 0.85s ease,
+      stroke 0.85s ease;
   }
 
-  .frontier-net-node.is-hot {
-    animation: frontier-net-hot 2.2s ease-in-out infinite;
+  .frontier-cube-left {
+    fill: rgba(255, 255, 255, 0.08);
+    stroke: rgba(255, 255, 255, 0.28);
+    stroke-width: 0.65;
+    transition:
+      fill 0.85s ease,
+      stroke 0.85s ease;
   }
 
-  .frontier-net-node.is-hot .frontier-net-node-core {
-    fill: rgba(251, 146, 60, 0.9);
+  .frontier-cube-right {
+    fill: rgba(255, 255, 255, 0.14);
+    stroke: rgba(255, 255, 255, 0.32);
+    stroke-width: 0.65;
+    transition:
+      fill 0.85s ease,
+      stroke 0.85s ease;
   }
 
-  .frontier-net-hot-halo {
-    fill: rgba(239, 68, 68, 0.18);
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: frontier-net-halo 2.2s ease-in-out infinite;
+  .frontier-cube.is-hot .frontier-cube-top {
+    fill: rgba(143, 85, 251, 0.55);
+    stroke: rgba(196, 181, 253, 0.9);
+  }
+
+  .frontier-cube.is-hot .frontier-cube-left {
+    fill: rgba(91, 80, 221, 0.38);
+    stroke: rgba(143, 85, 251, 0.7);
+  }
+
+  .frontier-cube.is-hot .frontier-cube-right {
+    fill: rgba(143, 85, 251, 0.42);
+    stroke: rgba(167, 139, 250, 0.8);
+  }
+
+  .gpu-cube-top {
+    fill: #1a1a1d;
+    stroke: rgba(255, 255, 255, 0.42);
+    stroke-width: 0.7;
+    transition:
+      fill 0.85s ease,
+      stroke 0.85s ease;
+  }
+
+  .gpu-cube-left {
+    fill: #0c0c0e;
+    stroke: rgba(255, 255, 255, 0.28);
+    stroke-width: 0.65;
+    transition:
+      fill 0.85s ease,
+      stroke 0.85s ease;
+  }
+
+  .gpu-cube-right {
+    fill: #121214;
+    stroke: rgba(255, 255, 255, 0.32);
+    stroke-width: 0.65;
+    transition:
+      fill 0.85s ease,
+      stroke 0.85s ease;
+  }
+
+  .gpu-cube.is-hot .gpu-cube-top {
+    fill: #8f55fb;
+    stroke: rgba(196, 181, 253, 0.9);
+  }
+
+  .gpu-cube.is-hot .gpu-cube-left {
+    fill: #4a2d8a;
+    stroke: rgba(143, 85, 251, 0.75);
+  }
+
+  .gpu-cube.is-hot .gpu-cube-right {
+    fill: #6b3fd4;
+    stroke: rgba(167, 139, 250, 0.85);
+  }
+
+  .en-axis {
+    stroke: rgba(255, 255, 255, 0.42);
+    stroke-width: 1.35;
+  }
+
+  .en-grid {
+    stroke: rgba(255, 255, 255, 0.12);
+    stroke-width: 1;
+  }
+
+  .en-area {
+    stroke: none;
+  }
+
+  .en-trend {
+    fill: none;
+    stroke: rgba(196, 181, 253, 0.82);
+    stroke-width: 2;
+    stroke-dasharray: 4 7;
+    stroke-linecap: round;
+  }
+
+  .en-point {
+    stroke-width: 1.1;
+  }
+
+  .en-point.is-hot {
+    fill: rgba(91, 80, 221, 0.92);
+    stroke: rgba(167, 139, 250, 0.55);
+  }
+
+  .en-point.is-warm {
+    fill: rgba(143, 85, 251, 0.88);
+    stroke: rgba(196, 181, 253, 0.5);
+  }
+
+  .en-point.is-mid {
+    fill: rgba(167, 139, 250, 0.92);
+    stroke: rgba(221, 214, 254, 0.55);
+  }
+
+  .en-point.is-lite {
+    fill: rgba(255, 255, 255, 0.94);
+    stroke: rgba(255, 255, 255, 0.7);
+  }
+
+  .hw-tile {
+    fill: rgba(255, 255, 255, 0.07);
+    stroke: rgba(255, 255, 255, 0.34);
+    stroke-width: 0.85;
+    transition:
+      fill 0.85s ease,
+      stroke 0.85s ease;
+  }
+
+  .hw-tile.is-hot {
+    fill: rgba(143, 85, 251, 0.42);
+    stroke: rgba(196, 181, 253, 0.88);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -156,10 +281,7 @@
     }
 
     .frontier-net-drift,
-    .frontier-net-edge,
-    .frontier-net-node,
-    .frontier-net-node.is-hot,
-    .frontier-net-hot-halo {
+    .frontier-net-edge {
       animation: none;
     }
 
@@ -167,6 +289,7 @@
       stroke-dasharray: none;
       stroke: rgba(255, 255, 255, 0.22);
     }
+
   }
 }
 
@@ -176,45 +299,13 @@
     transform: translate(0, 0);
   }
   50% {
-    transform: translate(-6px, 4px);
+    transform: translate(-5px, 3px);
   }
 }
 
 @keyframes frontier-net-flow {
   to {
     stroke-dashoffset: -30;
-  }
-}
-
-@keyframes frontier-net-pulse {
-  0%,
-  100% {
-    opacity: 0.55;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes frontier-net-hot {
-  0%,
-  100% {
-    opacity: 0.75;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes frontier-net-halo {
-  0%,
-  100% {
-    opacity: 0.35;
-    transform: scale(0.85);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.15);
   }
 }
 
