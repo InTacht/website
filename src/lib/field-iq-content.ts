@@ -43,6 +43,7 @@ export const act3 = {
       title: "Deposit",
       subtitle: "Drop",
       body: "Words are placed directly onto a continuous field grid, creating localized signals of information.",
+      caption: "Each word becomes a local signal",
       asset: "/assets/field-iq/deposit-diagram.svg",
     },
     {
@@ -51,6 +52,7 @@ export const act3 = {
       title: "Propagate",
       subtitle: "Flow",
       body: "Information travels naturally across the sequence using fast wave operations, combining context across thousands of words simultaneously.",
+      caption: "Signals travel and mix",
       asset: "/assets/field-iq/propagate-fft.svg",
     },
     {
@@ -59,6 +61,7 @@ export const act3 = {
       title: "Read Back",
       subtitle: "Listen",
       body: "The model simply samples the field state at the exact position where it needs an answer.",
+      caption: "Listen here for the answer",
       asset: "/assets/field-iq/readback-pin.svg",
     },
   ],
@@ -72,8 +75,8 @@ export const act4 = {
       id: "holo",
       title: "Holographic Wave Fields",
       points: [
-        "Uses smooth wave signals to read massive documents in fractions of a second.",
-        "Keeps processing speed fast and smooth, no matter how long the text gets.",
+        "Context is the document the model is reading.",
+        "Holographic wave fields store that whole document as one wave, so a longer page is not a slower read.",
       ],
       asset: "/assets/field-iq/holo-wave.svg",
       speed: -0.15,
@@ -82,8 +85,8 @@ export const act4 = {
       id: "gmem",
       title: "Grassmannian Precision Memory",
       points: [
-        "Uses specialized geometric memory to pinpoint needle-in-a-haystack details with 97%+ recall accuracy.",
-        "Operates with a fixed memory footprint that never expands, eliminating GPU memory crashes during long conversations.",
+        "A long conversation is a haystack of details.",
+        "Grassmannian memory holds a fixed-size map of that haystack, then pins the needle with 97%+ recall.",
       ],
       asset: "/assets/field-iq/grassmann-manifold.svg",
       speed: 0.2,
@@ -94,7 +97,7 @@ export const act4 = {
 export const act5 = {
   eyebrow: "5 · The Impact",
   headline: "Practical Comparison",
-  columns: ["Practical Metric", "Traditional Large Models", "Field-IQ Powered Architecture"],
+  columns: ["Metric", "Traditional", "Field-IQ"] as const,
   rows: [
     {
       metric: "Speed over Long Text",

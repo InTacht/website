@@ -1,19 +1,20 @@
 "use client";
 
-import { useId } from "react";
+import { useEffect, useId, useState } from "react";
 
 const COLS = 16;
 const ROWS = 10;
-const SRC = { c: 6, r: 5 };
 const W = 560;
 const H = 315;
+const NODE_COUNT = COLS * ROWS;
+const HOT_MIN = 3;
+const HOT_MAX = 4;
+const START_HOT = [5 * COLS + 6, 3 * COLS + 11, 7 * COLS + 3, 2 * COLS + 8];
 
 type Node = {
   x: number;
   y: number;
   rad: number;
-  delay: string;
-  source: boolean;
 };
 
 type Edge = {
@@ -31,20 +32,55 @@ function project(c: number, r: number) {
   return { x, y, rad: 1.7 + depth * 2.2 };
 }
 
+function pickUnused(used: Set<number>) {
+  const pool = VISIBLE.length ? VISIBLE : Array.from({ length: NODE_COUNT }, (_, i) => i);
+  let next = pool[Math.floor(Math.random() * pool.length)];
+  let guard = 0;
+  while (used.has(next) && guard < 48) {
+    next = pool[Math.floor(Math.random() * pool.length)];
+    guard += 1;
+  }
+  return next;
+}
+
+function stepHot(current: number[]) {
+  const size = Math.random() < 0.45 ? HOT_MIN : HOT_MAX;
+  const next = [...current];
+
+  while (next.length > size) {
+    next.splice(Math.floor(Math.random() * next.length), 1);
+  }
+
+  const used = new Set(next);
+  const swaps = next.length >= 2 && Math.random() < 0.4 ? 2 : 1;
+
+  for (let i = 0; i < swaps; i += 1) {
+    const at = Math.floor(Math.random() * next.length);
+    used.delete(next[at]);
+    const fresh = pickUnused(used);
+    next[at] = fresh;
+    used.add(fresh);
+  }
+
+  while (next.length < size) {
+    const fresh = pickUnused(used);
+    next.push(fresh);
+    used.add(fresh);
+  }
+
+  return next;
+}
+
 function buildField() {
-  const origin = project(SRC.c, SRC.r);
   const nodes: Node[] = [];
 
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLS; c++) {
       const point = project(c, r);
-      const dist = Math.hypot(point.x - origin.x, point.y - origin.y);
       nodes.push({
         x: point.x,
         y: point.y,
         rad: point.rad,
-        delay: `${(dist / 110).toFixed(2)}s`,
-        source: c === SRC.c && r === SRC.r,
       });
     }
   }
@@ -70,6 +106,10 @@ function buildField() {
 }
 
 const FIELD = buildField();
+const VISIBLE = FIELD.nodes
+  .map((node, i) => ({ i, ...node }))
+  .filter((node) => node.x > 56 && node.x < 520 && node.y > 46 && node.y < 248)
+  .map((node) => node.i);
 
 /**
  * Act 2 — spatial field specimen.
@@ -80,6 +120,20 @@ export function SpatialFieldPlate() {
   const rail = `sf-rail-${uid}`;
   const visMask = `sf-vis-${uid}`;
   const visGrad = `sf-vis-grad-${uid}`;
+  const glow = `sf-glow-${uid}`;
+  const [hot, setHot] = useState(START_HOT);
+  const hotSet = new Set(hot);
+
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (reduce.matches) return;
+
+    const id = window.setInterval(() => {
+      setHot((current) => stepHot(current));
+    }, 1600);
+
+    return () => window.clearInterval(id);
+  }, []);
 
   return (
     <article
@@ -112,6 +166,19 @@ export function SpatialFieldPlate() {
             <stop offset="82%" stopColor="white" stopOpacity="0.55" />
             <stop offset="100%" stopColor="white" stopOpacity="0.22" />
           </radialGradient>
+          <filter
+            id={glow}
+            x="-120%"
+            y="-120%"
+            width="340%"
+            height="340%"
+            colorInterpolationFilters="sRGB"
+          >
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2.2" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+            </feMerge>
+          </filter>
           <mask
             id={visMask}
             maskUnits="userSpaceOnUse"
@@ -126,6 +193,20 @@ export function SpatialFieldPlate() {
           </mask>
         </defs>
 
+        {FIELD.nodes.map((node, i) => {
+          if (!hotSet.has(i)) return null;
+          return (
+            <circle
+              key={`g-${i}`}
+              cx={node.x}
+              cy={node.y}
+              r={node.rad + 5}
+              fill="rgba(143,85,251,0.32)"
+              filter={`url(#${glow})`}
+            />
+          );
+        })}
+
         <g mask={`url(#${visMask})`}>
           {FIELD.edges.map((edge, i) => (
             <line
@@ -137,16 +218,20 @@ export function SpatialFieldPlate() {
               y2={edge.y2}
             />
           ))}
-          {FIELD.nodes.map((node, i) => (
-            <circle
-              key={`n-${i}`}
-              className={node.source ? "en-point is-hot" : "en-point is-mid"}
-              cx={node.x}
-              cy={node.y}
-              r={node.source ? node.rad + 2.4 : node.rad}
-              style={{ animationDelay: node.delay }}
-            />
-          ))}
+          {FIELD.nodes.map((node, i) => {
+            const lit = hotSet.has(i);
+            return (
+              <circle
+                key={`n-${i}`}
+                className={lit ? "sf-point is-hot" : "sf-point"}
+                cx={node.x}
+                cy={node.y}
+                r={node.rad}
+                fill={lit ? "#8f55fb" : "rgba(255,255,255,0.38)"}
+                stroke={lit ? "rgba(196,181,253,0.72)" : "rgba(255,255,255,0.22)"}
+              />
+            );
+          })}
         </g>
 
         <rect x="0" y="52" width="2" height="210" fill={`url(#${rail})`} />

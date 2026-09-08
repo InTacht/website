@@ -17,7 +17,7 @@ export function StorySection({
       aria-labelledby={labelledBy}
       className={`relative px-8 py-24 md:px-14 md:py-32 lg:px-16 lg:py-36 ${className}`}
     >
-      <div className="relative mx-auto max-w-6xl">{children}</div>
+      <div className="relative mx-auto max-w-5xl">{children}</div>
     </section>
   );
 }

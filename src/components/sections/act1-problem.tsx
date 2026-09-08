@@ -24,7 +24,7 @@ export function Act1Problem() {
       aria-labelledby="act1-headline"
       className="relative flex min-h-svh flex-col justify-start px-8 pb-40 pt-24 md:px-14 md:pb-48 md:pt-32 lg:px-16"
     >
-      <div className="relative z-10 mx-auto grid w-full max-w-6xl gap-14 lg:grid-cols-2 lg:items-start lg:gap-16">
+      <div className="relative z-10 mx-auto grid w-full max-w-5xl gap-14 lg:grid-cols-2 lg:items-start lg:gap-16">
         <div>
           <StoryEyebrow>{act1.eyebrow}</StoryEyebrow>
           <StoryHeadline id="act1-headline">{act1.headline}</StoryHeadline>

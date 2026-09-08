@@ -1,54 +1,126 @@
 "use client";
 
-import { useId } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 
 const W = 560;
 const H = 315;
-
-const RAW = [
-  { x: 48, y: 108, r: 5.5, tone: "hot" as const },
-  { x: 92, y: 86, r: 6, tone: "hot" as const },
-  { x: 136, y: 118, r: 6.5, tone: "warm" as const },
-  { x: 180, y: 72, r: 7, tone: "warm" as const },
-  { x: 224, y: 112, r: 6.5, tone: "warm" as const },
-  { x: 268, y: 64, r: 8, tone: "mid" as const },
-  { x: 312, y: 104, r: 7, tone: "mid" as const },
-  { x: 356, y: 58, r: 8.5, tone: "mid" as const },
-  { x: 400, y: 96, r: 8, tone: "lite" as const },
-  { x: 444, y: 54, r: 9, tone: "lite" as const },
-  { x: 492, y: 82, r: 8, tone: "lite" as const },
+const COLS = 32;
+const ROWS = 20;
+const SX = 19.4;
+const RX = 9.1;
+const SY = 13.4;
+const RY = 2.05;
+const RAW_W = (COLS - 1) * SX + (ROWS - 1) * RX;
+const RAW_H = (ROWS - 1) * SY + (COLS - 1) * RY;
+const SCALE = Math.max((W + 168) / RAW_W, (H + 132) / RAW_H);
+const OX = (W - RAW_W * SCALE) / 2;
+const OY = (H - RAW_H * SCALE) / 2;
+const K = 0.82;
+const OMEGA = 1.28;
+const AMP = 15;
+const CREST = 4.2;
+const SOURCES = [
+  { c: 10.6, r: 8.0 },
+  { c: 22.1, r: 11.8 },
 ] as const;
 
-const OX = 270;
-const OY = 86;
-const SX = 1.42;
-const SY = 4.2;
-const CX = W / 2;
-const CY = H / 2;
-const SR = 1.55;
+type Pt = { x: number; y: number; z: number };
 
-const mapX = (x: number) => CX + (x - OX) * SX;
-const mapY = (y: number) => CY + (y - OY) * SY;
-const mapR = (r: number) => r * SR;
+function height(c: number, r: number, t: number) {
+  let z = 0;
+  for (const src of SOURCES) {
+    const d = Math.hypot(c - src.c, r - src.r) + 0.4;
+    z += AMP * Math.exp(-d * 0.038) * Math.sin(K * d - OMEGA * t);
+  }
+  return z;
+}
 
-const POINTS = RAW.map((point) => ({
-  ...point,
-  x: mapX(point.x),
-  y: mapY(point.y),
-  r: mapR(point.r),
-}));
+function project(c: number, r: number, z: number) {
+  return {
+    x: OX + (c * SX + r * RX) * SCALE,
+    y: OY + (r * SY + c * RY) * SCALE - z * SCALE,
+    z,
+  };
+}
 
-const TREND = `M${mapX(48)} ${mapY(108)} C${mapX(92)} ${mapY(86)}, ${mapX(136)} ${mapY(118)}, ${mapX(180)} ${mapY(72)} S${mapX(268)} ${mapY(64)}, ${mapX(312)} ${mapY(104)} S${mapX(400)} ${mapY(96)}, ${mapX(492)} ${mapY(82)}`;
+function strokePath(points: Pt[], crestOnly: boolean) {
+  let d = "";
+  let drawing = false;
+  for (const p of points) {
+    if (crestOnly && p.z < CREST) {
+      drawing = false;
+      continue;
+    }
+    d += `${drawing ? "L" : "M"}${p.x.toFixed(1)} ${p.y.toFixed(1)}`;
+    drawing = true;
+  }
+  return d;
+}
+
+function buildMesh(t: number) {
+  const grid: Pt[][] = [];
+  for (let r = 0; r < ROWS; r += 1) {
+    const row: Pt[] = [];
+    for (let c = 0; c < COLS; c += 1) {
+      row.push(project(c, r, height(c, r, t)));
+    }
+    grid.push(row);
+  }
+
+  const rows = grid.map((row) => strokePath(row, false));
+  const cols: string[] = [];
+  for (let c = 0; c < COLS; c += 1) {
+    cols.push(strokePath(grid.map((row) => row[c]), false));
+  }
+
+  const crests = [
+    ...grid.map((row) => strokePath(row, true)),
+    ...Array.from({ length: COLS }, (_, c) => strokePath(grid.map((row) => row[c]), true)),
+  ].filter(Boolean);
+
+  const sources = SOURCES.map((src) => project(src.c, src.r, height(src.c, src.r, t) + 2));
+
+  const plane = [
+    project(0, 0, 0),
+    project(COLS - 1, 0, 0),
+    project(COLS - 1, ROWS - 1, 0),
+    project(0, ROWS - 1, 0),
+  ];
+
+  return { rows, cols, crests, sources, plane };
+}
 
 /**
  * Act 2 — field waves specimen.
- * Same diagram, scaled to the plate. Lockup sits on top.
+ * Two-source superposition on a membrane. The carpet.
  */
 export function WaveFieldPlate() {
   const uid = useId().replace(/:/g, "");
   const rail = `wf-rail-${uid}`;
   const visMask = `wf-vis-${uid}`;
   const visGrad = `wf-vis-grad-${uid}`;
+  const glow = `wf-glow-${uid}`;
+  const [t, setT] = useState(0);
+  const mesh = useMemo(() => buildMesh(t), [t]);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const start = performance.now();
+    let frame = 0;
+    let last = 0;
+
+    const tick = (now: number) => {
+      if (now - last >= 32) {
+        last = now;
+        setT((now - start) / 1000);
+      }
+      frame = window.requestAnimationFrame(tick);
+    };
+
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
 
   return (
     <article
@@ -71,16 +143,34 @@ export function WaveFieldPlate() {
 
           <radialGradient
             id={visGrad}
-            cx="58%"
-            cy="46%"
-            r="86%"
+            cx="50%"
+            cy="50%"
+            r="92%"
             gradientUnits="objectBoundingBox"
           >
             <stop offset="0%" stopColor="white" stopOpacity="1" />
-            <stop offset="58%" stopColor="white" stopOpacity="0.94" />
-            <stop offset="82%" stopColor="white" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="white" stopOpacity="0.22" />
+            <stop offset="78%" stopColor="white" stopOpacity="1" />
+            <stop offset="100%" stopColor="white" stopOpacity="0.82" />
           </radialGradient>
+          <radialGradient id={`${uid}-src`} cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#c4b5fd" stopOpacity="0.9" />
+            <stop offset="55%" stopColor="#8f55fb" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#8f55fb" stopOpacity="0" />
+          </radialGradient>
+          <filter
+            id={glow}
+            x="-80%"
+            y="-80%"
+            width="260%"
+            height="260%"
+            colorInterpolationFilters="sRGB"
+          >
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2.1" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
           <mask
             id={visMask}
             maskUnits="userSpaceOnUse"
@@ -90,21 +180,62 @@ export function WaveFieldPlate() {
             height={H}
           >
             <rect width={W} height={H} fill={`url(#${visGrad})`} />
-            <ellipse cx="108" cy="278" rx="132" ry="62" fill="black" fillOpacity="0.42" />
-            <rect x="0" y="0" width={W} height="44" fill="black" fillOpacity="0.28" />
+            <ellipse cx="112" cy="282" rx="128" ry="56" fill="black" fillOpacity="0.28" />
+            <rect x="0" y="0" width={W} height="40" fill="black" fillOpacity="0.16" />
           </mask>
         </defs>
 
         <g mask={`url(#${visMask})`}>
-          <path className="en-trend" d={TREND} />
-          {POINTS.map((point, i) => (
-            <circle
-              key={`p-${i}`}
-              className={`en-point is-${point.tone}`}
-              cx={point.x}
-              cy={point.y}
-              r={point.r}
+          <path
+            d={`M${mesh.plane[0].x.toFixed(1)} ${mesh.plane[0].y.toFixed(1)}L${mesh.plane[1].x.toFixed(1)} ${mesh.plane[1].y.toFixed(1)}L${mesh.plane[2].x.toFixed(1)} ${mesh.plane[2].y.toFixed(1)}L${mesh.plane[3].x.toFixed(1)} ${mesh.plane[3].y.toFixed(1)}Z`}
+            fill="rgba(255,255,255,0.03)"
+            stroke="rgba(255,255,255,0.1)"
+            strokeWidth="0.8"
+          />
+
+          {mesh.rows.map((d, i) => (
+            <path
+              key={`r-${i}`}
+              d={d}
+              fill="none"
+              stroke="rgba(255,255,255,0.28)"
+              strokeWidth="1"
+              strokeLinejoin="round"
             />
+          ))}
+          {mesh.cols.map((d, i) => (
+            <path
+              key={`c-${i}`}
+              d={d}
+              fill="none"
+              stroke="rgba(255,255,255,0.16)"
+              strokeWidth="0.85"
+              strokeLinejoin="round"
+            />
+          ))}
+          {mesh.crests.map((d, i) => (
+            <path
+              key={`k-${i}`}
+              d={d}
+              fill="none"
+              stroke="#8f55fb"
+              strokeWidth="1.55"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          ))}
+
+          {mesh.sources.map((src, i) => (
+            <g key={`s-${i}`} filter={`url(#${glow})`}>
+              <ellipse
+                cx={src.x}
+                cy={src.y}
+                rx="11"
+                ry="7"
+                fill={`url(#${uid}-src)`}
+              />
+              <ellipse cx={src.x} cy={src.y} rx="2.4" ry="1.6" fill="#c4b5fd" />
+            </g>
           ))}
         </g>
 

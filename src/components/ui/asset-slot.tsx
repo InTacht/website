@@ -53,7 +53,7 @@ export function AssetSlot({
       />
       <div
         hidden
-        className="absolute inset-0 flex flex-col items-center justify-center gap-2 px-6 text-center"
+        className="absolute inset-0 hidden flex-col items-center justify-center gap-2 px-6 text-center"
       >
         <span className="text-[11px] font-light uppercase tracking-[0.22em] text-white/35">
           Visual

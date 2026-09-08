@@ -21,7 +21,7 @@ export function FieldIqStory() {
         <div className="absolute inset-0 bg-black" />
         <div className="absolute inset-x-0 bottom-0 h-[min(70vh,780px)]">
           <Image
-            src="/footer-bg.png"
+            src="/story-bg-4.jpg"
             alt=""
             fill
             className="object-cover object-bottom"

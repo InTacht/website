@@ -85,6 +85,12 @@
     backdrop-filter: blur(20px) saturate(160%);
   }
 
+  .glass-cutout {
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
   .twinkling-stars {
     z-index: 1;
     mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);
@@ -168,6 +174,21 @@
     stroke: rgba(167, 139, 250, 0.8);
   }
 
+  .frontier-cube.is-held .frontier-cube-top {
+    fill: rgba(143, 85, 251, 0.28);
+    stroke: rgba(196, 181, 253, 0.55);
+  }
+
+  .frontier-cube.is-held .frontier-cube-left {
+    fill: rgba(91, 80, 221, 0.2);
+    stroke: rgba(143, 85, 251, 0.42);
+  }
+
+  .frontier-cube.is-held .frontier-cube-right {
+    fill: rgba(143, 85, 251, 0.24);
+    stroke: rgba(167, 139, 250, 0.48);
+  }
+
   .gpu-cube-top {
     fill: #1a1a1d;
     stroke: rgba(255, 255, 255, 0.42);
@@ -210,50 +231,62 @@
     stroke: rgba(167, 139, 250, 0.85);
   }
 
-  .en-axis {
-    stroke: rgba(255, 255, 255, 0.42);
-    stroke-width: 1.35;
+  .en-cell {
+    transform-box: fill-box;
+    transform-origin: 50% 100%;
+    animation: en-rise 1.05s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
-  .en-grid {
-    stroke: rgba(255, 255, 255, 0.12);
-    stroke-width: 1;
+  .en-cell-top,
+  .en-cell-left,
+  .en-cell-right {
+    stroke-width: 0.7;
   }
 
-  .en-area {
-    stroke: none;
+  .en-cell-top {
+    fill: rgba(255, 255, 255, 0.16);
+    stroke: rgba(255, 255, 255, 0.3);
   }
 
-  .en-trend {
-    fill: none;
-    stroke: rgba(196, 181, 253, 0.82);
-    stroke-width: 2;
-    stroke-dasharray: 4 7;
-    stroke-linecap: round;
+  .en-cell-left {
+    fill: rgba(255, 255, 255, 0.05);
+    stroke: rgba(255, 255, 255, 0.16);
   }
 
-  .en-point {
-    stroke-width: 1.1;
+  .en-cell-right {
+    fill: rgba(255, 255, 255, 0.09);
+    stroke: rgba(255, 255, 255, 0.2);
   }
 
-  .en-point.is-hot {
-    fill: rgba(91, 80, 221, 0.92);
-    stroke: rgba(167, 139, 250, 0.55);
+  .en-cell.is-warm .en-cell-top {
+    fill: rgba(167, 139, 250, 0.42);
+    stroke: rgba(196, 181, 253, 0.62);
   }
 
-  .en-point.is-warm {
-    fill: rgba(143, 85, 251, 0.88);
-    stroke: rgba(196, 181, 253, 0.5);
+  .en-cell.is-warm .en-cell-left {
+    fill: rgba(91, 80, 221, 0.22);
+    stroke: rgba(143, 85, 251, 0.4);
   }
 
-  .en-point.is-mid {
-    fill: rgba(167, 139, 250, 0.92);
-    stroke: rgba(221, 214, 254, 0.55);
+  .en-cell.is-warm .en-cell-right {
+    fill: rgba(143, 85, 251, 0.3);
+    stroke: rgba(167, 139, 250, 0.5);
   }
 
-  .en-point.is-lite {
-    fill: rgba(255, 255, 255, 0.94);
-    stroke: rgba(255, 255, 255, 0.7);
+  .en-cell.is-hot .en-cell-top {
+    fill: rgba(196, 181, 253, 0.72);
+    stroke: rgba(255, 255, 255, 0.78);
+    animation: en-heat 2.6s ease-in-out infinite;
+  }
+
+  .en-cell.is-hot .en-cell-left {
+    fill: rgba(91, 80, 221, 0.4);
+    stroke: rgba(143, 85, 251, 0.62);
+  }
+
+  .en-cell.is-hot .en-cell-right {
+    fill: rgba(143, 85, 251, 0.5);
+    stroke: rgba(196, 181, 253, 0.72);
   }
 
   .hw-tile {
@@ -268,6 +301,11 @@
   .hw-tile.is-hot {
     fill: rgba(143, 85, 251, 0.42);
     stroke: rgba(196, 181, 253, 0.88);
+  }
+
+  .hw-tile.is-held {
+    fill: rgba(143, 85, 251, 0.22);
+    stroke: rgba(196, 181, 253, 0.42);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -290,7 +328,37 @@
       stroke: rgba(255, 255, 255, 0.22);
     }
 
+    .en-cell,
+    .en-cell.is-hot .en-cell-top {
+      animation: none;
+    }
+
   }
+}
+
+.sf-point {
+  stroke-width: 1.05;
+  transition:
+    fill 0.85s ease,
+    stroke 0.85s ease;
+}
+
+.mf-dot {
+  transition:
+    fill 0.85s ease,
+    stroke 0.85s ease;
+}
+
+.mf-bloom {
+  transition: opacity 0.85s ease;
+}
+
+.wf-trend {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.28);
+  stroke-width: 1.35;
+  stroke-linecap: round;
+  stroke-dasharray: 5 10;
 }
 
 @keyframes frontier-net-drift {
@@ -306,6 +374,27 @@
 @keyframes frontier-net-flow {
   to {
     stroke-dashoffset: -30;
+  }
+}
+
+@keyframes en-rise {
+  from {
+    opacity: 0.15;
+    transform: scaleY(0.16);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes en-heat {
+  0%,
+  100% {
+    fill: rgba(196, 181, 253, 0.58);
+  }
+  50% {
+    fill: rgba(255, 255, 255, 0.9);
   }
 }
 
