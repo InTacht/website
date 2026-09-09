@@ -6,8 +6,9 @@ export default function Home() {
   return (
     <SmoothScroll>
       <main className="relative">
-        <LandingView />
-        <FieldIqStory />
+        <LandingView>
+          <FieldIqStory />
+        </LandingView>
       </main>
     </SmoothScroll>
   );
