@@ -33,17 +33,19 @@ export function StoryEyebrow({ children }: { children: ReactNode }) {
 export function StoryHeadline({
   id,
   children,
+  as: Tag = "h2",
 }: {
   id: string;
   children: ReactNode;
+  as?: "h1" | "h2";
 }) {
   return (
-    <h2
+    <Tag
       id={id}
       className="max-w-3xl font-display text-balance text-3xl font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-5xl lg:text-[3.25rem]"
     >
       {children}
-    </h2>
+    </Tag>
   );
 }
 

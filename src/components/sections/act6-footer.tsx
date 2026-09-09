@@ -1,16 +1,20 @@
+import Link from "next/link";
 import {
   StoryHeadline,
   StorySection,
 } from "@/components/story-primitives";
 import { act6 } from "@/lib/field-iq-content";
 
-const CTA_CLASS =
+const CTA_PRIMARY =
   "glass rounded-full px-6 py-3 text-sm font-light tracking-wide text-white transition hover:opacity-90 md:px-7 md:text-base";
 
-const CTA_FILL = {
+const CTA_PRIMARY_FILL = {
   background:
     "linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(8,9,16,0.62) 100%)",
 } as const;
+
+const CTA_SECONDARY =
+  "rounded-full border border-white/15 px-6 py-3 text-sm font-light tracking-wide text-white/70 transition hover:border-white/30 hover:text-white md:px-7 md:text-base";
 
 export function Act6Footer() {
   return (
@@ -31,16 +35,22 @@ export function Act6Footer() {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
-            {act6.ctas.map((cta) => (
-              <a
-                key={cta.label}
-                href={cta.href}
-                className={CTA_CLASS}
-                style={CTA_FILL}
-              >
-                {cta.label}
-              </a>
-            ))}
+            {act6.ctas.map((cta) =>
+              cta.variant === "primary" ? (
+                <Link
+                  key={cta.label}
+                  href={cta.href}
+                  className={CTA_PRIMARY}
+                  style={CTA_PRIMARY_FILL}
+                >
+                  {cta.label}
+                </Link>
+              ) : (
+                <Link key={cta.label} href={cta.href} className={CTA_SECONDARY}>
+                  {cta.label}
+                </Link>
+              ),
+            )}
           </div>
 
           <div className="mt-14 flex flex-wrap items-center justify-center gap-8 text-[11px] font-light uppercase tracking-[0.22em] text-white/75">

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none">
+  <rect width="640" height="400" rx="16" fill="#0D0E15"/>
+  <text x="32" y="40" fill="rgba(255,255,255,0.75)" font-size="15" font-family="system-ui" font-weight="500">Three-Hop Answer Loss vs Load</text>
+  <text x="32" y="62" fill="rgba(255,255,255,0.35)" font-size="12" font-family="system-ui">Leak-free ladder, two seeds. Floor is about 2.83.</text>
+  <line x1="72" y1="320" x2="580" y2="320" stroke="rgba(255,255,255,0.12)"/>
+  <line x1="72" y1="88" x2="72" y2="320" stroke="rgba(255,255,255,0.12)"/>
+  <line x1="72" y1="108" x2="580" y2="108" stroke="rgba(255,255,255,0.12)" stroke-dasharray="4 6"/>
+  <text x="44" y="96" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">3.0</text>
+  <text x="48" y="208" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">2.0</text>
+  <text x="52" y="324" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">1.0</text>
+  <text x="586" y="112" fill="rgba(255,255,255,0.28)" font-size="10" font-family="system-ui">floor</text>
+  <path d="M140 268 L320 148 L500 108" stroke="#6366F1" stroke-width="2.5" stroke-opacity="0.9"/>
+  <circle cx="140" cy="268" r="5" fill="#fff"/>
+  <circle cx="320" cy="148" r="5" fill="#6366F1"/>
+  <circle cx="500" cy="108" r="5" fill="rgba(255,255,255,0.55)"/>
+  <text x="118" y="348" fill="rgba(255,255,255,0.5)" font-size="11" font-family="system-ui">nd=1 sustained</text>
+  <text x="286" y="348" fill="rgba(255,255,255,0.5)" font-size="11" font-family="system-ui">nd=4 marginal</text>
+  <text x="458" y="348" fill="rgba(255,255,255,0.5)" font-size="11" font-family="system-ui">nd=8 collapsed</text>
+</svg>

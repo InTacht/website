@@ -134,7 +134,7 @@ export const act6 = {
     "Unlocking scalable context processing without exponential energy or server costs. Review our research and open benchmarks.",
   ctas: [
     { label: "Explore Research Code", href: "#", variant: "primary" as const },
-    { label: "View Benchmarks", href: "#act-5", variant: "secondary" as const },
+    { label: "View Benchmarks", href: "/research", variant: "secondary" as const },
   ],
 } as const;
 
