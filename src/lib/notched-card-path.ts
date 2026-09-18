@@ -3,7 +3,7 @@
  * floor join the taper with continuous tangents, not 90-degree kinks.
  */
 
-export type NotchMode = "notch" | "rect";
+type NotchMode = "notch" | "rect";
 
 export type NotchedCardLayout = {
   path: string;

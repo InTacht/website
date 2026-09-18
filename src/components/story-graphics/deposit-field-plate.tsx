@@ -14,8 +14,8 @@ import {
 } from "@/components/story-graphics/mechanics-field";
 
 /**
- * Act 3 — deposit.
- * Words condense onto the sequence as tight local signals.
+ * Act 3 — Contextualize.
+ * Data, files, and tools drop into a Cortex well.
  */
 export function DepositFieldPlate() {
   const uid = useId().replace(/:/g, "");
@@ -47,7 +47,7 @@ export function DepositFieldPlate() {
   }, []);
 
   return (
-    <MechanicsShell ariaLabel="Deposit: words drop onto the field as local signals">
+    <MechanicsShell ariaLabel="Contextualize: data, files, and tools land in Cortex">
       <FieldStage
         uid={uid}
         dots={dots}
@@ -55,7 +55,18 @@ export function DepositFieldPlate() {
         spread={0.17}
         sourceMode="emit"
         showLabels={false}
+        rightMark=""
       >
+        <rect
+          x={AREA.x + 16}
+          y={AREA.y + AREA.h - 40}
+          width={AREA.w - 108}
+          height="26"
+          rx="13"
+          fill="rgba(143,85,251,0.1)"
+          stroke="rgba(196,181,253,0.28)"
+          strokeWidth="1"
+        />
         {SOURCES.map((source, sourceIndex) => {
           const point = sourcePoint(source);
           return (
@@ -116,15 +127,27 @@ export function DepositFieldPlate() {
           </g>
         ) : null}
         <text
-          x={AREA.x + AREA.w / 2}
-          y={AREA.y + AREA.h - 14}
+          x={AREA.x + 16 + (AREA.w - 108) / 2}
+          y={AREA.y + AREA.h - 27}
           textAnchor="middle"
-          fill="rgba(196,181,253,0.82)"
+          dominantBaseline="central"
+          fill="rgba(196,181,253,0.92)"
           fontFamily="var(--font-inter), system-ui, sans-serif"
           fontSize="11"
-          letterSpacing="0.6"
         >
-          stays local
+          lands in Cortex
+        </text>
+        <text
+          x={AREA.x + AREA.w - 8}
+          y={AREA.y + AREA.h - 27}
+          textAnchor="end"
+          dominantBaseline="central"
+          fill="rgba(196,181,253,0.88)"
+          fontFamily="var(--font-inter), system-ui, sans-serif"
+          fontSize="10"
+          letterSpacing="1.4"
+        >
+          CORTEX
         </text>
       </FieldStage>
     </MechanicsShell>

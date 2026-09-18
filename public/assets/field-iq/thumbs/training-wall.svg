@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="Training wall at context 1024 is 1.78 times after chunk 128.">
+  <rect width="640" height="400" fill="#0A0F1A"/>
+  <text x="40" y="48" fill="#93C5FD" font-size="13" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700" letter-spacing="0.24em">COUNTED WALL</text>
+  <!-- arc gauge -->
+  <path d="M120 300 A180 180 0 0 1 520 300" stroke="rgba(147,197,253,0.15)" stroke-width="28" fill="none" stroke-linecap="round"/>
+  <path d="M120 300 A180 180 0 0 1 380 140" stroke="#3B82F6" stroke-width="28" fill="none" stroke-linecap="round"/>
+  <circle cx="380" cy="140" r="14" fill="#FFFFFF"/>
+  <text x="320" y="250" text-anchor="middle" fill="#FFFFFF" font-size="72" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="900" letter-spacing="-0.04em">1.78×</text>
+  <text x="320" y="290" text-anchor="middle" fill="#93C5FD" font-size="14" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="600">chunk 128 · ctx 1024</text>
+  <text x="40" y="370" fill="rgba(147,197,253,0.5)" font-size="14" font-family="ui-sans-serif,system-ui,sans-serif">Priced. FLOP already expected ~2×. Not serving.</text>
+</svg>

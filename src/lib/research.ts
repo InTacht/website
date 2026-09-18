@@ -36,7 +36,6 @@ export type ResearchArticle = {
   lead: string;
   cover: string;
   coverFallback: string;
-  featured?: boolean;
   related: readonly string[];
   sections: ResearchSection[];
   citations?: readonly ResearchCitation[];
@@ -58,11 +57,10 @@ export const researchArticles: readonly ResearchArticle[] = [
     title: "Associative Recall",
     date: "2026-08-01",
     kind: "benchmark",
-    featured: true,
     excerpt:
       "MQAR is the public kill probe for content addressing. Diagonal fields sat at 0.25. Matrix-delta memory reached 0.971, then audited as published GDN.",
     lead: "If a model cannot fetch a value by its key, it has no content addressing. Stanford Hazy Research built MQAR for that question. We use it as a one-minute kill switch, before perplexity gets a vote.",
-    cover: "/assets/field-iq/benchmark-mqar-plot-lab.svg",
+    cover: "/assets/field-iq/thumbs/associative-recall.svg",
     coverFallback: "/assets/field-iq/benchmark-mqar-plot-lab.svg",
     related: ["matched-ppl", "false-depth", "constant-state"],
     sections: [
@@ -152,7 +150,7 @@ export const researchArticles: readonly ResearchArticle[] = [
     excerpt:
       "At context 1024, GDN-class memory beat a tuned transformer by 0.17 PPL at matched parameters, three seeds. The winner is published gated delta-rule state, not a new mixer.",
     lead: "Associative recall is the kill switch. Language-model loss is the second vote. On this stack, the same matrix-delta family that broke the MQAR ceiling also beat tuned attention on perplexity, at matched size, with pairing that actually worked.",
-    cover: "/assets/field-iq/benchmark-ppl-ctx1024.svg",
+    cover: "/assets/field-iq/thumbs/matched-ppl.svg",
     coverFallback: fieldIqAssets.fallbacks.mqarPlot,
     related: ["associative-recall", "training-wall", "diagonal-erase"],
     sections: [
@@ -223,7 +221,7 @@ export const researchArticles: readonly ResearchArticle[] = [
     excerpt:
       "O(1) mixer state is a class fact of gated delta-rule memory. Kimi Linear's 6x decode is Moonshot's serving result. Our 8GB map is screening, not a serving law.",
     lead: "A transformer keeps a key-value cache that grows with every token. A gated delta-rule mixer keeps a matrix of fixed size. That difference is real. Treating it as our measured serving win is not.",
-    cover: fieldIqAssets.kvCache,
+    cover: "/assets/field-iq/thumbs/constant-state.svg",
     coverFallback: fieldIqAssets.fallbacks.kvCache,
     related: ["associative-recall", "training-wall", "energy-wall"],
     sections: [
@@ -305,7 +303,7 @@ export const researchArticles: readonly ResearchArticle[] = [
     excerpt:
       "Quadratic attention plus a growing cache is a real energy tax. Kimi's line is turning that tax into intelligence. We have not measured joules per token.",
     lead: "Moonshot frames research as turning energy into intelligence. The tax is real: attention is quadratic in the window, and the cache grows with every token. Naming the tax is not the same as paying less of it.",
-    cover: fieldIqAssets.energyChart,
+    cover: "/assets/field-iq/thumbs/energy-wall.svg",
     coverFallback: fieldIqAssets.fallbacks.energyChart,
     related: ["constant-state", "training-wall", "associative-recall"],
     sections: [
@@ -363,7 +361,7 @@ export const researchArticles: readonly ResearchArticle[] = [
     excerpt:
       "Muon cut lab T* about 3.5x on memorization extraction. Moonshot reports about 2x FLOP at scale. Those are different claims. Lion did not reopen the slot.",
     lead: "Muon is a Newton-Schulz orthogonalized optimizer. In this lab it shortened time-to-threshold on a memorization extraction task. It did not move geometric coherence, and it did not become a composition result.",
-    cover: fieldIqAssets.nvidiaGpu,
+    cover: "/assets/field-iq/thumbs/muon.svg",
     coverFallback: fieldIqAssets.fallbacks.nvidiaGpu,
     related: ["key-coherence", "associative-recall", "proof-first"],
     sections: [
@@ -434,7 +432,7 @@ export const researchArticles: readonly ResearchArticle[] = [
     excerpt:
       "Components with a theorem survived. Components justified by analogy died. That filter is now process, including how we adopted GDN.",
     lead: "Most research pages only show what shipped. This lab's public residue includes a kill list. Analogy is cheap. GPU time is not.",
-    cover: fieldIqAssets.waveVector,
+    cover: "/assets/field-iq/thumbs/proof-first.svg",
     coverFallback: fieldIqAssets.fallbacks.waveVector,
     related: ["diagonal-erase", "codebook-floor", "associative-recall"],
     sections: [
@@ -494,7 +492,7 @@ export const researchArticles: readonly ResearchArticle[] = [
     excerpt:
       "On this stack, keys of one class cluster with cosine about 0.31. An unused rotation did not change that. Whether the objective chooses the geometry is still open.",
     lead: "F1 is a measurement: same-class keys are closer than chance on this lab stack. It is not a universal law, and it is not yet proof that the loss function selected the geometry.",
-    cover: "/assets/field-iq/holo-wave.svg",
+    cover: "/assets/field-iq/thumbs/key-coherence.svg",
     coverFallback: fieldIqAssets.fallbacks.holo,
     related: ["codebook-floor", "cascade-load", "muon"],
     sections: [
@@ -546,7 +544,7 @@ export const researchArticles: readonly ResearchArticle[] = [
     excerpt:
       "If binding is invertible and elementwise, forget-this-key is just global decay. That is why every diagonal decoration we tried stuck near 0.25 recall until the state became a matrix.",
     lead: "The holographic mixer failed MQAR for a reason you can write on one line. Selective erase needs a rank-one projector. A diagonal cannot supply one.",
-    cover: "/assets/field-iq/holo-wave.svg",
+    cover: "/assets/field-iq/thumbs/diagonal-erase.svg",
     coverFallback: fieldIqAssets.fallbacks.holo,
     related: ["associative-recall", "matched-ppl", "proof-first"],
     sections: [
@@ -624,7 +622,7 @@ export const researchArticles: readonly ResearchArticle[] = [
     excerpt:
       "On a leak-free ladder, depth 5 still learned when load was light. At three hops the cascade died between about 7 and 11 bindings per document, not when layers ran out.",
     lead: "A four-layer model was supposed to hit a wall at hop five. It did not. The cascade died when the document got crowded. That is a load boundary, not a depth theorem we still live on.",
-    cover: "/assets/field-iq/benchmark-cascade-load.svg",
+    cover: "/assets/field-iq/thumbs/cascade-load.svg",
     coverFallback: fieldIqAssets.fallbacks.spatialGrid,
     related: ["false-depth", "key-coherence", "associative-recall"],
     sections: [
@@ -678,7 +676,7 @@ export const researchArticles: readonly ResearchArticle[] = [
     excerpt:
       "Canonical RULER and passkey formats are mostly leak-clean. Several of them are still one-hop ceilings or multi-needle counts, not compositional depth.",
     lead: "A nested query that contains the previous query as a suffix is an induction-copy path. Public long-context tests can be clean of that leak and still fail to measure the thing their leaderboard name suggests.",
-    cover: fieldIqAssets.spatialGrid,
+    cover: "/assets/field-iq/thumbs/false-depth.svg",
     coverFallback: fieldIqAssets.fallbacks.spatialGrid,
     related: ["cascade-load", "associative-recall", "proof-first"],
     sections: [
@@ -749,7 +747,7 @@ export const researchArticles: readonly ResearchArticle[] = [
     excerpt:
       "On byte data, layer-1 written-key coherence sits on a codebook Gram floor near 0.38. Trained BPE arms both landed near 0.264 and missed the transfer prediction. F13 stays open.",
     lead: "If layer one is a token codebook, some of the clustering we measure in keys is inherited from the alphabet, not chosen by the mixer. That is a measurement. It is not a closed origin theorem.",
-    cover: "/assets/field-iq/deposit-diagram.svg",
+    cover: "/assets/field-iq/thumbs/codebook-floor.svg",
     coverFallback: fieldIqAssets.fallbacks.deposit,
     related: ["key-coherence", "proof-first", "cascade-load"],
     sections: [
@@ -814,7 +812,7 @@ export const researchArticles: readonly ResearchArticle[] = [
     excerpt:
       "After the chunked scan shipped, the remaining training wall at context 1024 was 1.78 times, not an unexplained tax. FLOP count already expected about 2 times more mixing work.",
     lead: "A slower mixer is allowed to be slower if you can point at the arithmetic. The 1.78 times training wall at length 1024 is priced. It is not a serving law, and it is not mysterious.",
-    cover: fieldIqAssets.nvidiaGpu,
+    cover: "/assets/field-iq/thumbs/training-wall.svg",
     coverFallback: fieldIqAssets.fallbacks.nvidiaGpu,
     related: ["matched-ppl", "constant-state", "energy-wall"],
     sections: [

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="A probe can be leak-clean and still not measure compositional depth.">
+  <defs>
+    <pattern id="f-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="rgba(34,211,238,0.08)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="640" height="400" fill="#061318"/>
+  <rect width="640" height="400" fill="url(#f-grid)"/>
+  <text x="40" y="48" fill="#22D3EE" font-size="13" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700" letter-spacing="0.24em">PROBE ≠ DEPTH</text>
+  <!-- nested boxes -->
+  <rect x="80" y="100" width="280" height="160" fill="none" stroke="#164E63" stroke-width="2"/>
+  <rect x="110" y="130" width="220" height="100" fill="none" stroke="#0E7490" stroke-width="2"/>
+  <rect x="140" y="155" width="160" height="50" fill="rgba(34,211,238,0.08)" stroke="#22D3EE" stroke-width="2"/>
+  <text x="220" y="188" text-anchor="middle" fill="#67E8F9" font-size="16" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700">Q₁ ⊂ Q₂ ⊂ Q₃</text>
+  <!-- false arrow -->
+  <path d="M400 180 L520 180 L520 280" stroke="#F472B6" stroke-width="3" fill="none" stroke-dasharray="8 6"/>
+  <circle cx="520" cy="280" r="8" fill="#F472B6"/>
+  <text x="400" y="160" fill="#F9A8D4" font-size="14" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700">copy path</text>
+  <text x="40" y="360" fill="rgba(103,232,249,0.7)" font-size="16" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="600">Leak-clean ≠ compositional hops</text>
+</svg>

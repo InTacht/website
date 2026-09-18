@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="MQAR. Matrix-delta holds at 0.971. Diagonal falls to about 0.25.">
+  <defs>
+    <linearGradient id="ar-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06070E"/>
+      <stop offset="55%" stop-color="#0B0D1A"/>
+      <stop offset="100%" stop-color="#16122E"/>
+    </linearGradient>
+    <linearGradient id="ar-fall" x1="0" y1="170" x2="0" y2="310" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0"/>
+      <stop offset="55%" stop-color="#7C3AED" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#6D28D9" stop-opacity="0.36"/>
+    </linearGradient>
+    <filter id="ar-glow" x="-30%" y="-80%" width="160%" height="260%">
+      <feGaussianBlur stdDeviation="2.8" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="640" height="400" fill="url(#ar-bg)"/>
+
+  <!-- Header -->
+  <text x="40" y="40" fill="#C4B5FD" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700" letter-spacing="0.32em">MQAR</text>
+  <text x="112" y="40" fill="rgba(255,255,255,0.28)" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600" letter-spacing="0.18em">KILL PROBE</text>
+
+  <!-- Score band -->
+  <text x="40" y="96" fill="#FFFFFF" font-size="54" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="800" letter-spacing="-0.045em">0.971</text>
+  <text x="228" y="76" fill="rgba(255,255,255,0.4)" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700" letter-spacing="0.16em">MATRIX-DELTA</text>
+  <text x="228" y="96" fill="rgba(255,255,255,0.55)" font-size="14" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="500">holds as context grows</text>
+
+  <line x1="40" y1="118" x2="600" y2="118" stroke="rgba(255,255,255,0.08)"/>
+
+  <!-- Plot (left/center only — right 100px reserved for labels) -->
+  <g stroke="rgba(255,255,255,0.045)" stroke-width="1">
+    <line x1="40" y1="170" x2="500" y2="170"/>
+    <line x1="40" y1="240" x2="500" y2="240"/>
+    <line x1="40" y1="310" x2="500" y2="310"/>
+  </g>
+
+  <path d="M52 170 C130 170, 185 235, 255 268 C325 300, 400 308, 500 310 L500 320 L52 320 Z" fill="url(#ar-fall)"/>
+  <path d="M52 170 L500 170" stroke="rgba(255,255,255,0.16)" stroke-width="1.5" stroke-dasharray="5 8" stroke-linecap="round"/>
+  <path d="M52 170 C130 170, 185 235, 255 268 C325 300, 400 308, 500 310" stroke="#A78BFA" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 170 C140 172, 260 176, 370 173 C430 171, 470 170, 500 169" stroke="#FFFFFF" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#ar-glow)"/>
+
+  <circle cx="500" cy="169" r="11" fill="#FFFFFF" fill-opacity="0.1"/>
+  <circle cx="500" cy="169" r="6" fill="#FFFFFF"/>
+  <circle cx="500" cy="310" r="9" fill="#A78BFA" fill-opacity="0.18"/>
+  <circle cx="500" cy="310" r="5" fill="#C4B5FD"/>
+
+  <!-- Right label column — aligned to endpoints, never over curves -->
+  <text x="528" y="174" fill="rgba(255,255,255,0.55)" font-size="12" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600" letter-spacing="0.08em">HOLD</text>
+  <text x="528" y="302" fill="#DDD6FE" font-size="28" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="800">~0.25</text>
+  <text x="528" y="324" fill="rgba(196,181,253,0.55)" font-size="10" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700" letter-spacing="0.12em">DIAGONAL</text>
+
+  <line x1="40" y1="348" x2="600" y2="348" stroke="rgba(255,255,255,0.08)"/>
+  <text x="40" y="376" fill="rgba(255,255,255,0.42)" font-size="13" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="500">Content address holds. Diagonal dies.</text>
+</svg>

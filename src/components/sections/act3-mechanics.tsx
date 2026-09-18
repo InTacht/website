@@ -5,6 +5,7 @@ import { useState } from "react";
 import {
   StoryEyebrow,
   StoryHeadline,
+  StoryLead,
   StorySection,
 } from "@/components/story-primitives";
 import { DepositFieldPlate } from "@/components/story-graphics/deposit-field-plate";
@@ -26,6 +27,7 @@ export function Act3Mechanics() {
     <StorySection id="act-3" labelledBy="act3-headline">
       <StoryEyebrow>{act3.eyebrow}</StoryEyebrow>
       <StoryHeadline id="act3-headline">{act3.headline}</StoryHeadline>
+      <StoryLead className="max-w-2xl">{act3.lead}</StoryLead>
 
       <NotchedGlass
         className="mt-10 md:mt-12"
@@ -33,7 +35,7 @@ export function Act3Mechanics() {
           <LayoutGroup>
             <div
               role="tablist"
-              aria-label="Field-IQ mechanics"
+              aria-label="IOTA phases"
               className="flex items-center gap-0.5 px-1 py-1 sm:gap-1"
             >
             {act3.steps.map((item, index) => {

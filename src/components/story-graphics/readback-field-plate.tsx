@@ -32,8 +32,8 @@ function probeX(t: number) {
 }
 
 /**
- * Act 3 — read back.
- * The model listens at one position on a living field.
+ * Act 3 — Improve.
+ * Confirmed outcomes become evidence for the next route.
  */
 export function ReadBackFieldPlate() {
   const uid = useId().replace(/:/g, "");
@@ -64,13 +64,14 @@ export function ReadBackFieldPlate() {
   }, []);
 
   return (
-    <MechanicsShell ariaLabel="Read back: sample the field at the answer">
+    <MechanicsShell ariaLabel="Improve: confirmed outcomes inform the next route">
       <FieldStage
         uid={uid}
         dots={dots}
         sources={SOURCES}
         spread={0.92}
         sourceMode="emit"
+        rightMark="CONFIRM"
       >
         <defs>
           <linearGradient id={beam} x1="0" y1="0" x2="0" y2="1">
@@ -114,6 +115,14 @@ export function ReadBackFieldPlate() {
           />
         </g>
         <circle
+          cx={sourcePoint(answer).x}
+          cy={sourcePoint(answer).y}
+          r="11"
+          fill="none"
+          stroke="rgba(196,181,253,0.55)"
+          strokeWidth="1.15"
+        />
+        <circle
           cx={x}
           cy={sourcePoint(SOURCES[1]).y}
           r="6.4"
@@ -121,7 +130,7 @@ export function ReadBackFieldPlate() {
           stroke="rgba(196,181,253,0.95)"
           strokeWidth="1.2"
         />
-        <WordMark x={x} y={2} mark={`answer: ${answer.mark}`} />
+        <WordMark x={x} y={2} mark={`confirm: ${answer.mark}`} />
         <text
           x={x}
           y={AREA.y + AREA.h - 14}
@@ -131,7 +140,7 @@ export function ReadBackFieldPlate() {
           fontSize="11"
           letterSpacing="0.6"
         >
-          read here
+          confirm here
         </text>
       </FieldStage>
     </MechanicsShell>

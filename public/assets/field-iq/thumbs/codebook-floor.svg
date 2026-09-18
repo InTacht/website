@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="Byte codebook Gram floor near 0.38. BPE landed near 0.26.">
+  <rect width="640" height="400" fill="#0F0E0C"/>
+  <text x="40" y="44" fill="#D6D3D1" font-size="13" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700" letter-spacing="0.24em">F13 · CODEBOOK</text>
+  <!-- strata -->
+  <rect x="0" y="80" width="640" height="120" fill="#44403C"/>
+  <rect x="0" y="200" width="640" height="100" fill="#1C1917"/>
+  <rect x="0" y="300" width="640" height="100" fill="#292524"/>
+  <line x1="0" y1="200" x2="640" y2="200" stroke="#A8A29E" stroke-width="2" stroke-dasharray="10 8"/>
+  <line x1="0" y1="300" x2="640" y2="300" stroke="#78716C" stroke-width="2" stroke-dasharray="10 8"/>
+  <text x="40" y="150" fill="#FAFAF9" font-size="48" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="800">0.38</text>
+  <text x="180" y="150" fill="#A8A29E" font-size="16" font-family="ui-sans-serif,system-ui,sans-serif">byte Gram floor</text>
+  <text x="40" y="265" fill="#E7E5E4" font-size="40" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="800">0.26</text>
+  <text x="170" y="265" fill="#A8A29E" font-size="16" font-family="ui-sans-serif,system-ui,sans-serif">trained BPE landing</text>
+  <text x="40" y="360" fill="#78716C" font-size="14" font-family="ui-sans-serif,system-ui,sans-serif">Alphabet inherits clustering. Transfer still open.</text>
+</svg>

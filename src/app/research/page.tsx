@@ -15,9 +15,6 @@ export const metadata = {
 
 export default function ResearchIndexPage() {
   const articles = getResearchArticles();
-  const featured = articles.find((article) => article.featured) ?? articles[0];
-  const rest = articles.filter((article) => article.slug !== featured.slug);
-  const [side, ...tail] = rest;
 
   return (
     <ResearchShell>
@@ -38,22 +35,11 @@ export default function ResearchIndexPage() {
             Nothing claimed that a probe has not earned.
           </StoryLead>
 
-          <div className="mt-16 grid gap-10 md:grid-cols-3 md:items-stretch md:gap-x-8 md:gap-y-12">
-            <ResearchCard
-              article={featured}
-              featured
-              className="md:col-span-2"
-            />
-            {side ? <ResearchCard article={side} /> : null}
+          <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+            {articles.map((article) => (
+              <ResearchCard key={article.slug} article={article} />
+            ))}
           </div>
-
-          {tail.length > 0 ? (
-            <div className="mt-10 grid gap-10 sm:grid-cols-2 md:mt-14 md:gap-x-8 md:gap-y-12">
-              {tail.map((article) => (
-                <ResearchCard key={article.slug} article={article} />
-              ))}
-            </div>
-          ) : null}
         </StorySection>
       </main>
     </ResearchShell>

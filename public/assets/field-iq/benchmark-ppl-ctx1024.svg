@@ -1,20 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none">
-  <rect width="640" height="400" rx="16" fill="#0D0E15"/>
-  <text x="32" y="40" fill="rgba(255,255,255,0.75)" font-size="15" font-family="system-ui" font-weight="500">Perplexity at Context 1024</text>
-  <text x="32" y="62" fill="rgba(255,255,255,0.35)" font-size="12" font-family="system-ui">Fair run, 3 seeds, matched params. Lower is better.</text>
-  <line x1="72" y1="320" x2="580" y2="320" stroke="rgba(255,255,255,0.12)"/>
-  <line x1="72" y1="88" x2="72" y2="320" stroke="rgba(255,255,255,0.12)"/>
-  <text x="44" y="96" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">3.10</text>
-  <text x="44" y="208" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">2.80</text>
-  <text x="44" y="324" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">2.50</text>
-  <rect x="160" y="131" width="88" height="189" rx="4" fill="rgba(255,255,255,0.22)"/>
-  <text x="168" y="120" fill="rgba(255,255,255,0.7)" font-size="13" font-family="system-ui">2.99</text>
-  <rect x="360" y="197" width="88" height="123" rx="4" fill="#6366F1" fill-opacity="0.85"/>
-  <text x="368" y="186" fill="rgba(255,255,255,0.85)" font-size="13" font-family="system-ui">2.82</text>
-  <g font-family="system-ui" font-size="11">
-    <rect x="160" y="340" width="10" height="10" rx="2" fill="rgba(255,255,255,0.45)"/>
-    <text x="176" y="349" fill="rgba(255,255,255,0.55)">Transformer++ 2.99</text>
-    <rect x="360" y="340" width="10" height="10" rx="2" fill="#6366F1"/>
-    <text x="376" y="349" fill="rgba(255,255,255,0.7)">GDN-class 2.82</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="Perplexity at context 1024. GDN-class memory at 2.82 beats Transformer++ at 2.99. Lower is better.">
+  <defs>
+    <radialGradient id="ppl-glow" cx="68%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.30"/>
+      <stop offset="45%" stop-color="#6366F1" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#0B0C12" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ppl-vignette" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000" stop-opacity="0.15"/>
+      <stop offset="55%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.48"/>
+    </linearGradient>
+    <linearGradient id="ppl-bar-win" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A5B4FC" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0.92"/>
+    </linearGradient>
+    <linearGradient id="ppl-bar-base" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.38)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.14)"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="640" height="400" fill="#0B0C12"/>
+  <rect width="640" height="400" fill="url(#ppl-glow)"/>
+  <rect width="640" height="400" fill="url(#ppl-vignette)"/>
+
+  <!-- Eyebrow -->
+  <text x="36" y="48" fill="rgba(255,255,255,0.45)" font-size="14" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="600" letter-spacing="0.28em">PPL</text>
+  <text x="90" y="48" fill="rgba(255,255,255,0.28)" font-size="14" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="500" letter-spacing="0.08em">· CTX 1024 · 3 SEEDS</text>
+
+  <!-- Baseline -->
+  <line x1="48" y1="318" x2="380" y2="318" stroke="rgba(255,255,255,0.18)" stroke-width="2"/>
+
+  <!-- Transformer++ bar (higher PPL = taller, muted) -->
+  <rect x="78" y="128" width="100" height="190" fill="url(#ppl-bar-base)"/>
+  <text x="128" y="116" text-anchor="middle" fill="rgba(255,255,255,0.55)" font-size="22" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="700" letter-spacing="-0.02em">2.99</text>
+  <text x="128" y="348" text-anchor="middle" fill="rgba(255,255,255,0.38)" font-size="12" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="600" letter-spacing="0.08em">T++</text>
+
+  <!-- GDN-class bar (lower PPL = shorter, indigo) -->
+  <rect x="230" y="178" width="100" height="140" fill="url(#ppl-bar-win)"/>
+  <text x="280" y="166" text-anchor="middle" fill="#FFFFFF" font-size="22" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="700" letter-spacing="-0.02em">2.82</text>
+  <text x="280" y="348" text-anchor="middle" fill="rgba(165,180,252,0.85)" font-size="12" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="600" letter-spacing="0.08em">GDN</text>
+
+  <!-- Delta callout between bars -->
+  <text x="204" y="248" text-anchor="middle" fill="#A5B4FC" font-size="13" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="700" letter-spacing="-0.01em">−0.17</text>
+
+  <!-- Punch line -->
+  <text x="36" y="372" fill="rgba(255,255,255,0.55)" font-size="15" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="500" letter-spacing="-0.01em">Lower is better. Matched params. Every seed.</text>
+
+  <!-- Hero score block -->
+  <g transform="translate(420 96)">
+    <text x="0" y="0" fill="rgba(165,180,252,0.9)" font-size="13" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="600" letter-spacing="0.18em">GDN-CLASS</text>
+    <text x="0" y="78" fill="#FFFFFF" font-size="78" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="700" letter-spacing="-0.04em">2.82</text>
+    <line x1="0" y1="108" x2="180" y2="108" stroke="rgba(255,255,255,0.14)" stroke-width="1.5"/>
+    <text x="0" y="140" fill="rgba(255,255,255,0.38)" font-size="13" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="600" letter-spacing="0.16em">TRANSFORMER++</text>
+    <text x="0" y="196" fill="rgba(255,255,255,0.55)" font-size="46" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="700" letter-spacing="-0.03em">2.99</text>
   </g>
 </svg>

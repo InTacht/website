@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
  * Viewport-locked meadow plate. Shared by the Field-IQ story and the research hub
  * so the two surfaces cannot drift.
  */
-export function StoryMeadowPlate() {
+function StoryMeadowPlate() {
   return (
     <div
       className="pointer-events-none sticky top-0 z-0 h-svh overflow-hidden"

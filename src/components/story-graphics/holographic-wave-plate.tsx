@@ -80,8 +80,8 @@ function fieldPath(t: number, wave: (typeof WAVES)[number]) {
 }
 
 /**
- * Act 4 — holographic wave fields.
- * Every line of the page writes into one field. One sample reads it.
+ * Act 4 — Cortex.
+ * Governed records become addressable context. One sample reads them.
  */
 export function HolographicWavePlate() {
   const uid = useId().replace(/:/g, "");
@@ -114,24 +114,24 @@ export function HolographicWavePlate() {
 
   return (
     <article
-      aria-label="Context is the document. A holographic wave field stores that whole document as one wave, so one read gets the page."
+      aria-label="Cortex holds governed data as addressable context, not prompt fragments."
       className="relative mt-6 overflow-hidden rounded-[1.5rem] border border-[rgba(255,255,255,0.18)] pb-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.22)] md:pb-5"
     >
       <header className="grid grid-cols-[0.38fr_1fr] items-end gap-3 px-5 pt-4 md:px-6 md:pt-5">
         <div className="min-w-0">
           <p className="text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
-            Context
+            Cortex
           </p>
           <p className="mt-1 truncate text-[13px] font-light text-white/85 md:text-sm">
-            the document
+            governed data
           </p>
         </div>
         <div className="min-w-0">
           <p className="text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
-            Holographic wave field
+            Addressable context
           </p>
           <p className="mt-1 truncate text-[13px] font-light text-white/85 md:text-sm">
-            the whole page, as a wave
+            not prompt fragments
           </p>
         </div>
       </header>
@@ -238,18 +238,44 @@ export function HolographicWavePlate() {
             stroke="rgba(255,255,255,0.24)"
             strokeWidth="1.1"
           />
+          <rect
+            x={LINE_X}
+            y={PAGE.y + LINE_START - 16}
+            width={LINES[0]}
+            height="10"
+            rx="2"
+            fill="rgba(255,255,255,0.18)"
+          />
           {LINES.map((width, i) => {
             const live = WAVES.find((wave) => wave.line === i);
+            const y = PAGE.y + LINE_START + i * LINE_GAP;
+            const fracs = [0.4, 0.33, 0.27] as const;
+            let x = LINE_X;
             return (
-              <rect
-                key={`${width}-${i}`}
-                x={LINE_X}
-                y={PAGE.y + LINE_START + i * LINE_GAP}
-                width={width}
-                height={LINE_H}
-                rx="3"
-                fill={live ? live.bar : "rgba(255,255,255,0.2)"}
-              />
+              <g key={`${width}-${i}`}>
+                {fracs.map((frac, c) => {
+                  const w = width * frac - 3;
+                  const cellX = x;
+                  x += width * frac;
+                  return (
+                    <rect
+                      key={`${width}-${i}-${c}`}
+                      x={cellX}
+                      y={y}
+                      width={w}
+                      height={LINE_H}
+                      rx="2"
+                      fill={
+                        live
+                          ? c === 0
+                            ? live.bar
+                            : "rgba(196,181,253,0.38)"
+                          : "rgba(255,255,255,0.16)"
+                      }
+                    />
+                  );
+                })}
+              </g>
             );
           })}
 
@@ -310,7 +336,7 @@ export function HolographicWavePlate() {
             fontSize="13"
             letterSpacing="1.6"
           >
-            READ
+            KNOW
           </text>
         </svg>
       </div>

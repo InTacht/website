@@ -34,6 +34,12 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${seasonMix.variable} ${GeistMono.variable} min-h-screen font-sans antialiased`}
       >
+        <a
+          href="#act-1"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[80] focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:text-black"
+        >
+          Skip to story
+        </a>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

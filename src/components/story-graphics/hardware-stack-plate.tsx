@@ -68,7 +68,7 @@ export function HardwareChassisPlate() {
 
   return (
     <article
-      aria-label="DGX-class server chassis"
+      aria-label="The same environment rebuilt for every session"
       className="glass relative aspect-[16/10] overflow-hidden rounded-[1.5rem]"
     >
       <svg
@@ -133,20 +133,20 @@ export function HardwareChassisPlate() {
       <div className="relative z-10 flex h-full flex-col justify-between px-6 py-5 md:px-8 md:py-7">
         <div className="flex items-start justify-between gap-4">
           <p className="text-xs font-light uppercase tracking-[0.28em] text-white/40 md:text-[13px]">
-            Hardware stack
+            Same stack
           </p>
           <p className="shrink-0 rounded-full bg-black/55 px-3 py-1 text-xs font-light uppercase tracking-[0.22em] text-white/80 backdrop-blur-sm md:text-[13px]">
-            <span className="text-[#c4b5fd]">64</span>
-            <span className="text-white/70"> GPU</span>
+            <span className="text-[#c4b5fd]">Each</span>
+            <span className="text-white/70"> session</span>
           </p>
         </div>
 
         <div className="pb-0.5">
           <p className="font-display text-[2.15rem] font-normal leading-none tracking-[-0.03em] text-white md:text-[2.55rem]">
-            Chassis
+            Rebuilt
           </p>
           <p className="mt-2.5 text-sm font-light uppercase tracking-[0.26em] text-white/45 md:text-base">
-            DGX-class
+            Files parsed again
           </p>
         </div>
       </div>
@@ -232,7 +232,7 @@ export function HardwareGpuPlate() {
 
   return (
     <article
-      aria-label="Isolated GPU die"
+      aria-label="A chat session that starts empty"
       className="glass relative aspect-square overflow-hidden rounded-[1.5rem]"
     >
       <div
@@ -295,10 +295,10 @@ export function HardwareGpuPlate() {
 
       <div className="relative z-10 flex h-full flex-col justify-between px-4 py-4 md:px-5 md:py-5">
         <p className="text-[10px] font-light uppercase tracking-[0.26em] text-white/55 md:text-xs">
-          Die
+          Session
         </p>
         <p className="font-display text-2xl font-normal leading-none tracking-[-0.03em] text-white md:text-[1.85rem]">
-          GPU
+          Empty
         </p>
       </div>
 

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="A diagonal cannot selectively forget. Stuck near 0.25 MQAR until matrix state.">
+  <defs>
+    <linearGradient id="de-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A0E14"/>
+      <stop offset="100%" stop-color="#101820"/>
+    </linearGradient>
+    <linearGradient id="de-cell" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0.25"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="640" height="400" fill="url(#de-bg)"/>
+
+  <!-- Header -->
+  <text x="40" y="38" fill="#7DD3FC" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700" letter-spacing="0.28em">DIAGONAL BIND</text>
+  <text x="200" y="38" fill="rgba(125,211,252,0.35)" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600" letter-spacing="0.14em">ERASE PROBLEM</text>
+
+  <line x1="40" y1="56" x2="600" y2="56" stroke="rgba(255,255,255,0.08)"/>
+
+  <!-- Left: matrix panel -->
+  <rect x="40" y="76" width="280" height="230" fill="rgba(56,189,248,0.04)" stroke="rgba(56,189,248,0.18)"/>
+
+  <!-- Diagonal cells (stay inside panel) -->
+  <g>
+    <rect x="64" y="96" width="36" height="28" fill="url(#de-cell)" opacity="0.35"/>
+    <rect x="108" y="128" width="36" height="28" fill="url(#de-cell)" opacity="0.48"/>
+    <rect x="152" y="160" width="36" height="28" fill="url(#de-cell)" opacity="0.62"/>
+    <rect x="196" y="192" width="36" height="28" fill="url(#de-cell)" opacity="0.78"/>
+    <rect x="240" y="224" width="36" height="28" fill="url(#de-cell)" opacity="0.92"/>
+  </g>
+
+  <!-- Slash clipped to panel feel -->
+  <line x1="56" y1="88" x2="300" y2="292" stroke="#FB7185" stroke-width="10" stroke-linecap="round" opacity="0.92"/>
+
+  <text x="64" y="286" fill="rgba(125,211,252,0.5)" font-size="11" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600" letter-spacing="0.12em">elementwise · invertible</text>
+
+  <!-- Right: message column -->
+  <text x="360" y="120" fill="rgba(255,255,255,0.45)" font-size="14" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="500">forget-this-key is</text>
+  <text x="360" y="158" fill="#FFFFFF" font-size="22" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600">just global decay</text>
+
+  <line x1="360" y1="180" x2="560" y2="180" stroke="rgba(255,255,255,0.12)"/>
+
+  <text x="360" y="220" fill="rgba(255,255,255,0.4)" font-size="13" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="600" letter-spacing="0.14em">NEEDS</text>
+  <text x="360" y="268" fill="#FB7185" font-size="42" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="900" letter-spacing="-0.03em">RANK-1</text>
+  <text x="360" y="296" fill="rgba(251,113,133,0.55)" font-size="13" font-family="ui-sans-serif, system-ui, sans-serif">a diagonal cannot supply one</text>
+
+  <!-- Footer -->
+  <line x1="40" y1="328" x2="600" y2="328" stroke="rgba(255,255,255,0.08)"/>
+  <text x="40" y="364" fill="#FDA4AF" font-size="16" font-family="ui-sans-serif, system-ui, sans-serif" font-weight="700">MQAR stuck · 0.25</text>
+  <text x="230" y="364" fill="rgba(253,164,175,0.45)" font-size="14" font-family="ui-sans-serif, system-ui, sans-serif">until matrix state</text>
+</svg>

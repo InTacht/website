@@ -10,10 +10,10 @@ export const projects: Project[] = [
   {
     id: "iota",
     name: "IOTA",
-    tagline: "Autonomous intelligence deployment",
+    tagline: "Adaptive intelligence runtime",
     color: "#5B50DD",
     description:
-      "The application layer of the ecosystem. A generalized, self-learning platform built for autonomous, continuous improvement through constant feedback loops—not a static model.",
+      "The application layer of the InTacht ecosystem. IOTA brings context, compute, and specialist models together as one intelligence that can operate now and improve from confirmed experience over time.",
   },
   {
     id: "xqua",

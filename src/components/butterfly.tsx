@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { useMemo, type CSSProperties } from "react";
 import { projects, type Project } from "@/lib/projects";
 
-export type ReleaseOrigin = { x: number; y: number };
+type ReleaseOrigin = { x: number; y: number };
 
 type ButterflySwarmProps = {
   origin: ReleaseOrigin | null;

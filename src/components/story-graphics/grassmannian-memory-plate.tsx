@@ -29,7 +29,11 @@ const HAYSTACK = [
   [168, 120],
 ] as const;
 const NEEDLE = 6;
-const PIN_LOCAL = { x: CX + 74, y: CY - 22 };
+const DEST = [
+  { x: CX + 74, y: CY - 22, label: "capable" },
+  { x: CX - 48, y: CY + 42, label: "fast" },
+  { x: CX + 22, y: CY + 58, label: "local" },
+] as const;
 
 function rotate(x: number, y: number, cx: number, cy: number, deg: number) {
   const r = (deg * Math.PI) / 180;
@@ -42,8 +46,8 @@ function rotate(x: number, y: number, cx: number, cy: number, deg: number) {
 }
 
 /**
- * Act 4 — Grassmannian precision memory.
- * A long conversation is a haystack. Memory is a fixed-size map. One pin finds the needle.
+ * Act 4 — Router.
+ * Evidence from the work pins one path. The rest stay available.
  */
 export function GrassmannianMemoryPlate() {
   const uid = useId().replace(/:/g, "");
@@ -51,7 +55,9 @@ export function GrassmannianMemoryPlate() {
   const wash = `gm-wash-${uid}`;
   const [t, setT] = useState(0.6);
   const tilt = 7.5 * Math.sin(t * 0.32);
-  const pin = rotate(PIN_LOCAL.x, PIN_LOCAL.y, CX, CY, tilt);
+  const hot = ((Math.floor(Math.max(0, t) / 2.2) % DEST.length) + DEST.length) % DEST.length;
+  const dest = DEST[hot] ?? DEST[0];
+  const pin = rotate(dest.x, dest.y, CX, CY, tilt);
   const hay = HAYSTACK[NEEDLE];
   const pulse = 0.55 + 0.35 * (0.5 + 0.5 * Math.sin(t * 1.7));
 
@@ -74,24 +80,24 @@ export function GrassmannianMemoryPlate() {
 
   return (
     <article
-      aria-label="A long conversation is a haystack of details. Grassmannian memory maps it into a fixed-size geometry and pins the needle."
+      aria-label="The router pins one path through the work instead of calling a larger model by default."
       className="relative mt-6 overflow-hidden rounded-[1.5rem] border border-[rgba(255,255,255,0.18)] pb-4 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.22)] md:pb-5"
     >
       <header className="grid grid-cols-[0.38fr_1fr] items-end gap-3 px-5 pt-4 md:px-6 md:pt-5">
         <div className="min-w-0">
           <p className="text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
-            Haystack
+            Work
           </p>
           <p className="mt-1 truncate text-[13px] font-light text-white/85 md:text-sm">
-            the conversation
+            the query
           </p>
         </div>
         <div className="min-w-0">
           <p className="text-[10px] font-light uppercase tracking-[0.2em] text-white/40">
-            Fixed memory
+            Router
           </p>
           <p className="mt-1 truncate text-[13px] font-light text-white/85 md:text-sm">
-            one pin, same size
+            one evidence path
           </p>
         </div>
       </header>
@@ -202,6 +208,32 @@ export function GrassmannianMemoryPlate() {
             />
           </g>
 
+          {DEST.map((item, i) => {
+            const point = rotate(item.x, item.y, CX, CY, tilt);
+            if (i === hot) return null;
+            return (
+              <g key={item.label}>
+                <circle
+                  cx={point.x}
+                  cy={point.y}
+                  r="4.2"
+                  fill="rgba(196,181,253,0.18)"
+                  stroke="rgba(196,181,253,0.45)"
+                  strokeWidth="1"
+                />
+                <text
+                  x={point.x + 10}
+                  y={point.y + 4}
+                  fill="rgba(255,255,255,0.38)"
+                  fontFamily="var(--font-inter), system-ui, sans-serif"
+                  fontSize="10"
+                >
+                  {item.label}
+                </text>
+              </g>
+            );
+          })}
+
           <circle
             cx={pin.x}
             cy={pin.y}
@@ -228,7 +260,7 @@ export function GrassmannianMemoryPlate() {
             fontSize="13"
             letterSpacing="1.6"
           >
-            PIN
+            ROUTE
           </text>
         </svg>
       </div>

@@ -1,73 +1,136 @@
 import type { Project } from "@/lib/projects";
 
+type BentoChip = {
+  label: string;
+  note: string;
+};
+
 export type BentoPanelContent = {
   mono: string;
   headline: string;
-  body: string;
-  chips: string[];
+  chips: BentoChip[];
   metric: { value: string; label: string; sub?: string };
   access: string;
   output: string;
   phases: { title: string; detail: string }[];
-  highlights: string[];
+  outputPoints: string[];
+  metricPoints: string[];
 };
 
 export const bentoPanels: Record<Project["id"], BentoPanelContent> = {
   xqua: {
     mono: "[INFRASTRUCTURE · AQUA]",
     headline: "Open-source shared computing fabric",
-    body: "AI demands massive compute. Aqua bypasses centralized server farms by pooling accessible resources into one cohesive, distributed engine for everyone.",
-    chips: ["Distributed mesh", "Open-source", "Compute pooling", "Shared fabric"],
+    chips: [
+      { label: "Distributed mesh", note: "Pool resources into one engine" },
+      { label: "Open-source", note: "Bypass centralized farms" },
+      { label: "Compute pooling", note: "Idle GPU and CPU cycles" },
+      { label: "Shared fabric", note: "One engine for everyone" },
+    ],
     metric: { value: "∞", label: "Scale potential", sub: "Nodes pooled" },
     access: "Open-source framework",
     output: "Shared computing fabric",
-    highlights: [
-      "Bypass centralized farms",
-      "Pool idle GPU & CPU cycles",
-      "Unified distributed engine",
+    outputPoints: [
+      "Pool accessible resources into one engine.",
+      "Idle GPU and CPU, not centralized farms.",
+      "A shared compute fabric for everyone.",
+    ],
+    metricPoints: [
+      "Pool resources into one engine",
+      "Idle GPU and CPU cycles",
+      "A fabric, not a central farm",
     ],
     phases: [
-      { title: "Pool", detail: "Aggregate accessible resources across the mesh" },
-      { title: "Weave", detail: "Unify nodes into one cohesive compute fabric" },
-      { title: "Scale", detail: "Deliver supercomputing power to everyone" },
+      {
+        title: "Pool",
+        detail: "Idle GPU and CPU cycles become one engine.",
+      },
+      {
+        title: "Weave",
+        detail: "Nodes unify into one cohesive compute fabric.",
+      },
+      {
+        title: "Scale",
+        detail: "Supercomputing as a shared fabric, not a farm.",
+      },
     ],
   },
   iq: {
     mono: "[RESEARCH · INTECH IQ]",
     headline: "AI-native research on consumer hardware",
-    body: "Foundational work—not surface fine-tuning. Engineering cheaper, faster intelligence through algorithmic efficiency on consumer-grade GPUs.",
-    chips: ["1M param scale", "Published research", "Efficiency bridge", "Consumer GPUs"],
+    chips: [
+      { label: "1M param scale", note: "Efficiency bound for the lab" },
+      { label: "Publications", note: "Numbers from the ledger" },
+      { label: "Efficiency bridge", note: "Algorithmic efficiency" },
+      { label: "Consumer GPUs", note: "Enterprise-grade on the edge" },
+    ],
     metric: { value: "1M", label: "Parameter bound", sub: "Efficiency focus" },
     access: "Internal lab & research",
     output: "Theorems, proofs & models",
-    highlights: [
-      "Enterprise-grade on edge hardware",
-      "Algorithmic efficiency bridge",
-      "Actionable measurements at scale",
+    outputPoints: [
+      "Enterprise-grade work on consumer-grade GPUs.",
+      "Algorithmic efficiency, not surface fine-tuning.",
+      "Published numbers from the ledger, at 1M.",
+    ],
+    metricPoints: [
+      "Efficiency bound for the lab",
+      "Numbers from the ledger",
+      "Enterprise-grade on the edge",
     ],
     phases: [
-      { title: "Measure", detail: "Theorems, proofs & perplexity observations" },
-      { title: "Optimize", detail: "Learning rates & tokenizer efficiency" },
-      { title: "Publish", detail: "Radically accessible intelligence output" },
+      {
+        title: "Measure",
+        detail: "Theorems, proofs, and numbers from the ledger.",
+      },
+      {
+        title: "Optimize",
+        detail: "Algorithmic efficiency on consumer-grade GPUs.",
+      },
+      {
+        title: "Publish",
+        detail: "Enterprise-grade work on edge hardware.",
+      },
     ],
   },
   iota: {
     mono: "[APPLICATION · IOTA]",
-    headline: "Generalized self-learning intelligence",
-    body: "Not a static model—a platform for autonomous, continuous improvement through constant feedback loops across the full Intech ecosystem.",
-    chips: ["Feedback loops", "Autonomous training", "Self-correction", "Live deployment"],
-    metric: { value: "24/7", label: "Learning cycle", sub: "Always improving" },
-    access: "Platform application",
-    output: "Self-learning harness",
-    highlights: [
-      "Autonomous continuous training",
-      "Real-time measurement & output",
-      "Self-correction feedback loops",
+    headline: "Intelligence is a system, not a single model.",
+    chips: [
+      { label: "Cortex memory", note: "Durable context outside weights" },
+      { label: "IQ profiles", note: "One contract, changing internals" },
+      { label: "Model experts", note: "Specialists, not one checkpoint" },
+      { label: "Adaptive routing", note: "Evidence from the work itself" },
+    ],
+    metric: {
+      value: "IQ01",
+      label: "Context, models, and policy",
+      sub: "OpenAI-compatible",
+    },
+    access: "OpenAI-compatible API",
+    output: "Governed, context-aware intelligence",
+    outputPoints: [
+      "Durable context lives outside the model weights.",
+      "Evidence routes work between specialist models.",
+      "Confirmed outcomes become specific intelligence.",
+    ],
+    metricPoints: [
+      "Durable context outside weights",
+      "Specialists, not one checkpoint",
+      "One contract, live internals",
     ],
     phases: [
-      { title: "Train", detail: "Autonomous training on live signals" },
-      { title: "Measure", detail: "Capture output, metrics & performance" },
-      { title: "Correct", detail: "Close the loop with self-correction" },
+      {
+        title: "Contextualize",
+        detail: "An IQ profile binds Cortex to the model routes the task needs.",
+      },
+      {
+        title: "Route",
+        detail: "Evidence from the work selects the model and compute path.",
+      },
+      {
+        title: "Improve",
+        detail: "Confirmed outcomes stay. Model output is not knowledge by default.",
+      },
     ],
   },
 };

@@ -5,6 +5,7 @@ import { HolographicWavePlate } from "@/components/story-graphics/holographic-wa
 import {
   StoryEyebrow,
   StoryHeadline,
+  StoryLead,
   StorySection,
 } from "@/components/story-primitives";
 import { GlassCard } from "@/components/ui/glass-card";
@@ -16,6 +17,7 @@ export function Act4EngineRoom() {
     <StorySection id="act-4" labelledBy="act4-headline">
       <StoryEyebrow>{act4.eyebrow}</StoryEyebrow>
       <StoryHeadline id="act4-headline">{act4.headline}</StoryHeadline>
+      <StoryLead>{act4.lead}</StoryLead>
 
       <div className="mt-14 grid gap-5 md:grid-cols-2 md:gap-6">
         {act4.cards.map((card) => (
@@ -28,7 +30,7 @@ export function Act4EngineRoom() {
                 {card.points.map((point) => (
                   <li
                     key={point}
-                    className="text-sm font-light leading-relaxed text-white/50 md:text-[15px]"
+                    className="story-dim text-sm font-light leading-relaxed text-white/50 md:text-[15px]"
                   >
                     {point}
                   </li>

@@ -1,92 +1,86 @@
-export const fieldIqTheme = {
-  bg: "#090A0F",
-  bgElevated: "#0D0E15",
-  bgPanel: "#12141F",
-  cyan: "#00F0FF",
-  indigo: "#6366F1",
-  alert: "#EF4444",
-} as const;
-
 export const act1 = {
-  eyebrow: "1 · The Invisible Wall",
-  headline: "Modern AI Is Running Into a Resource Wall.",
+  eyebrow: "1 · The Limitation",
+  headline: "One Model Is Being Asked to Do Everything.",
   subheadline:
-    "Today's models are remarkably smart, but the math powering them is becoming impossibly expensive.",
-  body: "To read long text, standard AI calculates attention by connecting every single word to every other word. When applied to massive frontier models like Kimi K3—with nearly 3 trillion parameters—the real-world strain is staggering.",
+    "We ask one general model to absorb context, retrieve facts, inspect files, perform computation, use tools, reason, and make every decision.",
+  body: "The result looks simple in a chat box, but the system behind it is expensive, repetitive, and fragile.",
   callout:
-    "Running just one instance of a model at this scale can require over 1.5 Terabytes of memory just to load the weights, a cluster of 64 high-end GPUs, hundreds of kilowatts of continuous power, and up to $500,000 a month in cloud compute rentals.",
+    "Each new session starts with missing context. Live data must be inserted again. The same files are parsed again. The same environment is rebuilt again. Easy questions are sent to models designed for the hardest ones. When something fails, a larger model is often called even when the real problem is a broken connection or unavailable data.",
   bottomLine:
-    "As context grows, processing costs explode exponentially. AI isn't just running out of memory—it's running out of energy.",
+    "The limitation is not only model intelligence. It is the architecture around the model.",
   metrics: [
-    { id: "vram", label: "1.5 TB VRAM", icon: "database" as const },
-    { id: "power", label: "116 kW Power", icon: "zap" as const },
-    { id: "rent", label: "$500k/mo Cloud Rent", icon: "dollar" as const },
+    { id: "context", label: "Context rebuilt each session", icon: "database" as const },
+    { id: "env", label: "Same files parsed again", icon: "zap" as const },
+    { id: "cost", label: "Largest model by default", icon: "dollar" as const },
   ],
 } as const;
 
 export const act2 = {
-  eyebrow: "2 · The Turning Point",
-  headline: "What If AI Didn't Need to Compare Every Word?",
+  eyebrow: "2 · The Insight",
+  headline: "Intelligence Should Not Live Inside a Checkpoint.",
   subheadline:
-    "To make long-context AI fast, lightweight, and accessible, we have to rethink how information travels through a model.",
-  productReveal: "Introducing Field-IQ (Field-Based Intelligence Models).",
-  body: "Instead of forcing heavy, word-by-word matrix comparisons, Field-IQ passes information through continuous spatial fields—much like waves moving through water. By replacing brute-force matrix calculations with wave physics, AI can process massive documents in parallel at a fraction of the hardware cost.",
+    "Reasoning and context change at different speeds. A model can provide reasoning, but an organization's data, tools, policies, files, and operating history change continuously.",
+  productReveal:
+    "IOTA separates these responsibilities. Models reason. Cortex holds the context they reason over. The router decides which model, tool, and compute path should act.",
+  body: "Fine-tuning cannot be the storage layer for live reality, and a context window is not durable memory. The application sees one coherent intelligence instead of a collection of disconnected services.",
 } as const;
 
 export const act3 = {
-  eyebrow: "3 · The Mechanics",
-  headline: "Information Moving Like Waves",
+  eyebrow: "3 · Introducing IOTA",
+  headline: "One Intelligence, Assembled for the Task.",
+  lead: "IOTA is the application-layer runtime for context-aware intelligence. Developers call an IQ profile, not a fixed model checkpoint.",
   steps: [
     {
       id: "deposit",
       index: "01",
-      title: "Deposit",
-      subtitle: "Drop",
-      body: "Words are placed directly onto a continuous field grid, creating localized signals of information.",
-      caption: "Each word becomes a local signal",
+      title: "Contextualize",
+      subtitle: "Connect",
+      body: "Connect the data, files, tools, and knowledge the task requires. Today, an IQ profile binds a governed database Cortex to efficient and capable model routes, gate thresholds, prompts, and execution budgets.",
+      caption: "Give the work the context it needs",
       asset: "/assets/field-iq/deposit-diagram.svg",
     },
     {
       id: "propagate",
       index: "02",
-      title: "Propagate",
-      subtitle: "Flow",
-      body: "Information travels naturally across the sequence using fast wave operations, combining context across thousands of words simultaneously.",
-      caption: "Signals travel and mix",
+      title: "Route",
+      subtitle: "Decide",
+      body: "Select the right model and compute path using evidence from the work itself. IQ01 can be called through an ordinary OpenAI-compatible request. It validates generated SQL, executes it read-only, and records the cost and decisions behind the answer.",
+      caption: "Evidence chooses the path, not a fixed checkpoint",
       asset: "/assets/field-iq/propagate-fft.svg",
     },
     {
       id: "readback",
       index: "03",
-      title: "Read Back",
-      subtitle: "Listen",
-      body: "The model simply samples the field state at the exact position where it needs an answer.",
-      caption: "Listen here for the answer",
+      title: "Improve",
+      subtitle: "Confirm",
+      body: "Preserve confirmed outcomes so future decisions become more precise. A result is not treated as knowledge merely because a model produced it. Confirmation matters.",
+      caption: "Confirmed answers inform the next route",
       asset: "/assets/field-iq/readback-pin.svg",
     },
   ],
 } as const;
 
 export const act4 = {
-  eyebrow: "4 · The Engine Room",
-  headline: "Built for Speed. Engineered for Precision.",
+  eyebrow: "4 · The System",
+  headline: "Cortex Knows. Experts Reason. The Router Decides.",
+  lead: "Together, these parts behave as one intelligence without pretending they are one set of weights.",
   cards: [
     {
       id: "holo",
-      title: "Holographic Wave Fields",
+      title: "Cortex is the context layer",
       points: [
-        "Context is the document the model is reading.",
-        "Holographic wave fields store that whole document as one wave, so a longer page is not a slower read.",
+        "Today, it governs connected databases, semantic definitions, business rules, and confirmed answers.",
+        "It is expanding toward persistent organizational Cortexes and temporary session Cortexes where files, APIs, tools, and working state become addressable context instead of prompt fragments.",
       ],
       asset: "/assets/field-iq/holo-wave.svg",
       speed: -0.15,
     },
     {
       id: "gmem",
-      title: "Grassmannian Precision Memory",
+      title: "The router coordinates the work",
       points: [
-        "A long conversation is a haystack of details.",
-        "Grassmannian memory holds a fixed-size map of that haystack, then pins the needle with 97%+ recall.",
+        "Today, it operates inside the governed data execution loop, where it can see more than the opening prompt.",
+        "It distinguishes a model struggling with a schema from a database that is simply offline. It escalates when stronger reasoning can change the outcome, not merely when an error looks severe.",
       ],
       asset: "/assets/field-iq/grassmann-manifold.svg",
       speed: 0.2,
@@ -95,62 +89,68 @@ export const act4 = {
 } as const;
 
 export const act5 = {
-  eyebrow: "5 · The Impact",
-  headline: "Practical Comparison",
-  columns: ["Metric", "Traditional", "Field-IQ"] as const,
+  eyebrow: "5 · The Evolution",
+  headline: "From Confirmed Outcomes, Better Routing Evidence.",
+  lead: "A result is not treated as knowledge merely because a model produced it. Confirmation matters. This prevents a confident mistake from teaching the system to repeat itself.",
+  columns: ["Capability", "One-model stack", "IOTA"] as const,
   rows: [
     {
-      metric: "Speed over Long Text",
-      traditional: "Slows down dramatically as text gets longer",
-      fieldIq: "Stays consistently fast across thousands of pages",
+      metric: "Context",
+      traditional:
+        "Missing each new session. Live data and files inserted again as prompt fragments.",
+      fieldIq:
+        "Durable Cortex outside model weights. Confirmed answers stay available.",
     },
     {
-      metric: "Memory Growth (KV-Cache)",
-      traditional: "Keeps expanding until memory fills up",
-      fieldIq: "Stays small and constant, no matter the length",
+      metric: "Routing",
+      traditional:
+        "One general model for every problem. Larger models called when anything fails.",
+      fieldIq:
+        "Evidence-based routing between specialist models. Escalate only when it changes the outcome.",
     },
     {
-      metric: "Recall Accuracy",
-      traditional: "High, but requires massive hardware",
-      fieldIq: "Matches top-tier precision (97%+) at a fraction of the cost",
+      metric: "Memory",
+      traditional:
+        "Fine-tuning cannot store live reality. A context window is not durable.",
+      fieldIq:
+        "Confirmed outcomes become routing evidence. Inspectable traces, cost, and latency sit behind each answer.",
     },
     {
-      metric: "Hardware Required",
-      traditional: "Massive, multi-server data centers",
-      fieldIq: "Standard, accessible GPU hardware",
+      metric: "Compute",
+      traditional:
+        "The same environment is rebuilt again. Easy questions go to models meant for the hardest ones.",
+      fieldIq:
+        "Governed, read-only execution today. In-place Cortex compute is being built.",
     },
     {
-      metric: "Energy & Running Costs",
-      traditional: "Extremely expensive to serve at scale",
-      fieldIq: "Lightweight, sustainable execution",
+      metric: "Improvement",
+      traditional:
+        "No inspectable path from an answer back to the decision that produced it.",
+      fieldIq:
+        "Self-learning grounded in outcomes the system can inspect and the organization can confirm.",
     },
   ],
 } as const;
 
 export const act6 = {
-  eyebrow: "6 · Call to Action",
-  headline: "High-Performance AI, Built for Everyone.",
+  eyebrow: "6 · The Destination",
+  headline: "Stop Choosing One Model for Every Problem.",
   subheadline:
-    "Unlocking scalable context processing without exponential energy or server costs. Review our research and open benchmarks.",
+    "Connect a Cortex. Define an IQ profile. Let evidence decide how intelligence is assembled for the work.",
+  note: "Research creates new capability. IOTA composes it into useful intelligence. XQUA makes it accessible.",
   ctas: [
-    { label: "Explore Research Code", href: "#", variant: "primary" as const },
-    { label: "View Benchmarks", href: "/research", variant: "secondary" as const },
+    { label: "Read the IOTA Thesis", href: "/iota/thesis", variant: "primary" as const },
+    { label: "IQ Research", href: "/research?from=home", variant: "secondary" as const },
   ],
 } as const;
 
 /** Paths match Assets.md. Photo JPGs remain as fallbacks for hardware/charts. */
 export const fieldIqAssets = {
-  kimiLogo: "/assets/field-iq/kimi-logo.svg",
-  nvidiaServer: "/assets/field-iq/nvidia-dgx-server.svg",
   nvidiaGpu: "/assets/field-iq/nvidia-gpu-chip.svg",
   energyChart: "/assets/field-iq/energy-chart.svg",
   waveVector: "/assets/field-iq/wave-vector.svg",
-  spatialGrid: "/assets/field-iq/spatial-grid.svg",
-  mqarPlot: "/assets/field-iq/benchmark-mqar-plot.svg",
   kvCache: "/assets/field-iq/kv-cache-memory.svg",
   fallbacks: {
-    kimiLogo: "/assets/field-iq/frontier-model.jpg",
-    nvidiaServer: "/assets/field-iq/server-rack.jpg",
     nvidiaGpu: "/assets/field-iq/gpu-silicon.jpg",
     energyChart: "/assets/field-iq/energy-grid.jpg",
     waveVector: "/assets/field-iq/wave-field.jpg",
@@ -158,9 +158,6 @@ export const fieldIqAssets = {
     mqarPlot: "/assets/field-iq/benchmark-chart.jpg",
     kvCache: "/assets/field-iq/memory-bars.jpg",
     deposit: "/assets/field-iq/deposit-field.jpg",
-    propagate: "/assets/field-iq/propagate-signal.jpg",
-    readback: "/assets/field-iq/readback-focus.jpg",
     holo: "/assets/field-iq/holo-wave.jpg",
-    gmem: "/assets/field-iq/grassmann-geo.jpg",
   },
 } as const;

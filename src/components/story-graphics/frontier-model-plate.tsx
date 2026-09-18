@@ -115,7 +115,7 @@ export function FrontierModelPlate() {
 
   return (
     <article
-      aria-label="Kimi / Moonshot frontier model reference"
+      aria-label="One general model asked to do every task"
       className="glass relative aspect-[16/7] overflow-hidden rounded-[1.5rem]"
     >
       <svg
@@ -194,20 +194,20 @@ export function FrontierModelPlate() {
       <div className="relative z-10 flex h-full flex-col justify-between px-6 py-5 md:px-8 md:py-7">
         <div className="flex items-start justify-between gap-4">
           <p className="text-xs font-light uppercase tracking-[0.28em] text-white/40 md:text-[13px]">
-            Frontier reference
+            One checkpoint
           </p>
           <p className="shrink-0 text-xs font-light uppercase tracking-[0.22em] text-white/35 md:text-[13px]">
-            <span className="text-[#c4b5fd]">~3T</span>
-            <span className="text-white/30"> params</span>
+            <span className="text-[#c4b5fd]">All</span>
+            <span className="text-white/30"> tasks</span>
           </p>
         </div>
 
         <div className="pb-0.5">
           <p className="font-display text-[2.35rem] font-normal leading-none tracking-[-0.03em] text-white md:text-[2.85rem]">
-            Kimi
+            Generic
           </p>
           <p className="mt-2.5 text-sm font-light uppercase tracking-[0.26em] text-white/45 md:text-base">
-            Moonshot AI
+            Does everything
           </p>
         </div>
       </div>

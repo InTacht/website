@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="Perplexity duel. GDN 2.82 beats Transformer++ 2.99.">
+  <defs>
+    <linearGradient id="p-l" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A1B22"/>
+      <stop offset="100%" stop-color="#0C0D12"/>
+    </linearGradient>
+    <linearGradient id="p-r" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="400" fill="url(#p-l)"/>
+  <rect x="320" width="320" height="400" fill="url(#p-r)"/>
+  <line x1="320" y1="0" x2="320" y2="400" stroke="rgba(255,255,255,0.12)" stroke-width="2"/>
+  <text x="40" y="48" fill="rgba(255,255,255,0.35)" font-size="12" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700" letter-spacing="0.2em">TRANSFORMER++</text>
+  <text x="360" y="48" fill="#A5B4FC" font-size="12" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700" letter-spacing="0.2em">GDN-CLASS</text>
+  <text x="40" y="200" fill="rgba(255,255,255,0.55)" font-size="96" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="800" letter-spacing="-0.05em">2.99</text>
+  <text x="360" y="200" fill="#FFFFFF" font-size="96" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="800" letter-spacing="-0.05em">2.82</text>
+  <rect x="360" y="230" width="88" height="28" fill="#6366F1"/>
+  <text x="404" y="250" text-anchor="middle" fill="#fff" font-size="13" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700">WINS</text>
+  <text x="40" y="250" fill="rgba(255,255,255,0.3)" font-size="14" font-family="ui-sans-serif,system-ui,sans-serif">baseline</text>
+  <text x="320" y="340" text-anchor="middle" fill="#818CF8" font-size="28" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="800">−0.17</text>
+  <text x="320" y="372" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="13" font-family="ui-sans-serif,system-ui,sans-serif">ctx 1024 · 3 seeds · lower is better</text>
+</svg>

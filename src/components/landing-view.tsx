@@ -8,6 +8,7 @@ import { HeroCards } from "@/components/hero-cards";
 import { HeroCopy } from "@/components/hero-copy";
 import { LandingBackground } from "@/components/landing-background";
 import { PlatformsBento } from "@/components/platforms-bento";
+import { ctaPrimaryClass, ctaPrimaryStyle } from "@/components/ui/cta";
 import type { Project } from "@/lib/projects";
 
 const EXIT_MS = 450;
@@ -152,7 +153,8 @@ export function LandingView({ children }: { children?: ReactNode }) {
                 type="button"
                 onClick={goHome}
                 aria-label="Back to home"
-                className="glass absolute left-6 top-6 z-20 flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-light tracking-wide text-white transition-opacity hover:opacity-90 md:left-10 md:top-10 md:px-5 md:py-3 md:text-base"
+                className={`${ctaPrimaryClass} absolute left-6 top-6 z-20 gap-2 px-4 py-2.5 md:left-10 md:top-10 md:px-5 md:py-3`}
+                style={ctaPrimaryStyle}
               >
                 <svg
                   aria-hidden

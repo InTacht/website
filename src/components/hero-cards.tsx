@@ -28,15 +28,24 @@ export function HeroCards({ onCardClick, onMarkClick, markSpinning }: HeroCardsP
                 strength={14}
                 entrance={squareEntrance.pill}
               >
-                <div className="relative h-[15px] w-[78px]">
-                  <Image
-                    src="/logo-dark.svg"
-                    alt="InTacht"
-                    fill
-                    className="object-contain"
-                    priority
-                  />
-                </div>
+                <button
+                  type="button"
+                  aria-label="Reload InTacht home"
+                  onClick={() => {
+                    window.location.reload();
+                  }}
+                  className="relative flex h-full w-full items-center justify-center"
+                >
+                  <span className="relative h-[15px] w-[78px]">
+                    <Image
+                      src="/logo-dark.svg"
+                      alt="InTacht"
+                      fill
+                      className="object-contain"
+                      priority
+                    />
+                  </span>
+                </button>
               </MagneticItem>
 
               <MagneticItem

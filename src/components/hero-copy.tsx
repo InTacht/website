@@ -9,14 +9,12 @@ export function HeroCopy() {
       strength={10}
       entrance={squareEntrance.heroText}
     >
-      <h1 className="font-display text-4xl font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-5xl lg:text-6xl">
+      <h1 className="hero-title font-display text-4xl font-normal leading-[1.15] tracking-[-0.02em] text-white md:text-5xl lg:text-6xl">
         <span className="block whitespace-nowrap">Where Data</span>
         <span className="block whitespace-nowrap">Becomes Your Alpha.</span>
       </h1>
-      <p className="mt-4 text-lg font-light leading-relaxed tracking-wide text-white/55 md:mt-5 md:text-xl">
-        Democratizing compute power and AI-driven intelligence through a unified
-        ecosystem of distributed infrastructure, accessible research, and
-        self-learning platforms.
+      <p className="hero-lede mt-4 text-lg font-light leading-relaxed tracking-wide text-white/55 md:mt-5 md:text-xl">
+        Democratizing compute power and AI-driven intelligence through a unified ecosystem of distributed infrastructure, accessible research, and self-learning platforms.
       </p>
     </MagneticItem>
   );

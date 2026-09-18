@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="Energy tax. Quadratic attention plus growing cache. Joules not measured.">
+  <defs>
+    <radialGradient id="e-g" cx="70%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#0B0A08" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="640" height="400" fill="#0B0A08"/>
+  <rect width="640" height="400" fill="url(#e-g)"/>
+  <text x="40" y="280" fill="rgba(245,158,11,0.12)" font-size="200" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="900" letter-spacing="-0.06em">L²</text>
+  <circle cx="100" cy="300" r="8" fill="#EF4444" fill-opacity="0.6"/>
+  <circle cx="170" cy="270" r="12" fill="#F97316" fill-opacity="0.65"/>
+  <circle cx="250" cy="220" r="16" fill="#F59E0B" fill-opacity="0.7"/>
+  <circle cx="340" cy="160" r="22" fill="#FBBF24" fill-opacity="0.8"/>
+  <circle cx="440" cy="110" r="30" fill="#FDE68A" fill-opacity="0.85"/>
+  <circle cx="540" cy="70" r="38" fill="#FFFBEB" fill-opacity="0.9"/>
+  <text x="40" y="52" fill="#FBBF24" font-size="13" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700" letter-spacing="0.28em">ENERGY</text>
+  <text x="40" y="360" fill="#FFFFFF" font-size="28" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700">Tax is real.</text>
+  <text x="40" y="388" fill="rgba(253,230,138,0.55)" font-size="14" font-family="ui-sans-serif,system-ui,sans-serif">Joules per token: not measured on this stack.</text>
+</svg>

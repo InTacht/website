@@ -137,7 +137,7 @@ export function SpatialFieldPlate() {
 
   return (
     <article
-      aria-label="Spatial field"
+      aria-label="Cortex holds durable context outside model weights"
       className="glass relative aspect-[16/9] overflow-hidden rounded-[1.5rem]"
     >
       <svg
@@ -240,19 +240,19 @@ export function SpatialFieldPlate() {
       <div className="relative z-10 flex h-full flex-col justify-between px-6 py-5 md:px-8 md:py-7">
         <div className="flex items-start justify-between gap-4">
           <p className="text-xs font-light uppercase tracking-[0.28em] text-white/40 md:text-[13px]">
-            Field lattice
+            Context layer
           </p>
           <p className="shrink-0 text-xs font-light uppercase tracking-[0.22em] text-white/55 md:text-[13px]">
-            <span className="text-[#c4b5fd]">Parallel</span>
+            <span className="text-[#c4b5fd]">Durable</span>
           </p>
         </div>
 
         <div className="pb-0.5">
           <p className="font-display text-[2.15rem] font-normal leading-none tracking-[-0.03em] text-white md:text-[2.55rem]">
-            Spatial
+            Cortex
           </p>
           <p className="mt-2.5 text-sm font-light uppercase tracking-[0.26em] text-white/45 md:text-base">
-            Continuous grid
+            Outside weights
           </p>
         </div>
       </div>

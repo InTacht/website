@@ -1,24 +1,13 @@
-import Link from "next/link";
 import {
   StoryHeadline,
   StorySection,
 } from "@/components/story-primitives";
+import { CtaLink } from "@/components/ui/cta";
 import { act6 } from "@/lib/field-iq-content";
-
-const CTA_PRIMARY =
-  "glass rounded-full px-6 py-3 text-sm font-light tracking-wide text-white transition hover:opacity-90 md:px-7 md:text-base";
-
-const CTA_PRIMARY_FILL = {
-  background:
-    "linear-gradient(135deg, rgba(255,255,255,0.22) 0%, rgba(8,9,16,0.62) 100%)",
-} as const;
-
-const CTA_SECONDARY =
-  "rounded-full border border-white/15 px-6 py-3 text-sm font-light tracking-wide text-white/70 transition hover:border-white/30 hover:text-white md:px-7 md:text-base";
 
 export function Act6Footer() {
   return (
-    <StorySection id="act-6" labelledBy="act6-headline" className="pb-32 md:pb-40">
+    <StorySection id="act-6" labelledBy="act6-headline" className="pb-40 md:pb-52">
       <div className="relative mx-auto max-w-3xl text-center">
         <div
           aria-hidden
@@ -26,38 +15,25 @@ export function Act6Footer() {
         />
 
         <div className="relative [text-shadow:0_2px_18px_rgba(0,0,0,0.82)]">
-          <p className="mb-4 text-[11px] font-light uppercase tracking-[0.28em] text-white/75">
+          <p className="story-eyebrow mb-4 text-[11px] font-light uppercase tracking-[0.28em] text-white/75">
             {act6.eyebrow}
           </p>
           <StoryHeadline id="act6-headline">{act6.headline}</StoryHeadline>
-          <p className="mx-auto mt-5 max-w-xl text-lg font-light leading-relaxed tracking-wide text-white md:text-xl">
+          <p className="story-lead mx-auto mt-5 max-w-xl text-lg font-light leading-relaxed tracking-wide text-white md:text-xl">
             {act6.subheadline}
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
-            {act6.ctas.map((cta) =>
-              cta.variant === "primary" ? (
-                <Link
-                  key={cta.label}
-                  href={cta.href}
-                  className={CTA_PRIMARY}
-                  style={CTA_PRIMARY_FILL}
-                >
-                  {cta.label}
-                </Link>
-              ) : (
-                <Link key={cta.label} href={cta.href} className={CTA_SECONDARY}>
-                  {cta.label}
-                </Link>
-              ),
-            )}
+            {act6.ctas.map((cta) => (
+              <CtaLink key={cta.label} href={cta.href} variant={cta.variant}>
+                {cta.label}
+              </CtaLink>
+            ))}
           </div>
 
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-8 text-[11px] font-light uppercase tracking-[0.22em] text-white/75">
-            <span>PyTorch</span>
-            <span>GitHub</span>
-            <span>arXiv</span>
-          </div>
+          <p className="mx-auto mt-14 max-w-lg text-[13px] font-light leading-relaxed text-white/70">
+            {act6.note}
+          </p>
         </div>
       </div>
     </StorySection>

@@ -1,24 +1,71 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none">
-  <rect width="640" height="400" rx="16" fill="#0D0E15"/>
-  <text x="32" y="40" fill="rgba(255,255,255,0.75)" font-size="15" font-family="system-ui" font-weight="500">MQAR Recall Performance</text>
-  <text x="32" y="62" fill="rgba(255,255,255,0.35)" font-size="12" font-family="system-ui">Lab stack, Multi-Query Associative Recall</text>
-  <line x1="72" y1="320" x2="580" y2="320" stroke="rgba(255,255,255,0.12)"/>
-  <line x1="72" y1="88" x2="72" y2="320" stroke="rgba(255,255,255,0.12)"/>
-  <text x="52" y="96" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">100%</text>
-  <text x="58" y="208" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">50%</text>
-  <text x="64" y="324" fill="rgba(255,255,255,0.3)" font-size="10" font-family="system-ui">0</text>
-  <path d="M100 100 L200 100 L300 102 L400 101 L520 100" stroke="rgba(255,255,255,0.55)" stroke-width="2.5"/>
-  <circle cx="520" cy="100" r="5" fill="rgba(255,255,255,0.7)"/>
-  <path d="M100 100 L180 180 L260 230 L360 255 L520 262" stroke="#6366F1" stroke-width="2.5" stroke-opacity="0.85"/>
-  <circle cx="520" cy="262" r="5" fill="#6366F1"/>
-  <path d="M100 100 L200 108 L300 112 L400 110 L520 107" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/>
-  <circle cx="520" cy="107" r="5" fill="#fff"/>
-  <g font-family="system-ui" font-size="11">
-    <rect x="72" y="340" width="10" height="10" rx="2" fill="rgba(255,255,255,0.55)"/>
-    <text x="88" y="349" fill="rgba(255,255,255,0.55)">Attention 1.00</text>
-    <rect x="210" y="340" width="10" height="10" rx="2" fill="#6366F1"/>
-    <text x="226" y="349" fill="rgba(255,255,255,0.55)">Diagonal / holo ~0.25</text>
-    <rect x="400" y="340" width="10" height="10" rx="2" fill="#fff"/>
-    <text x="416" y="349" fill="rgba(255,255,255,0.7)">Matrix-delta 0.971</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="MQAR recall thumbnail. Matrix-delta holds at 0.971. Diagonal holographic recall falls to about 0.25.">
+  <defs>
+    <radialGradient id="mqar-glow" cx="72%" cy="38%" r="55%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.28"/>
+      <stop offset="45%" stop-color="#6366F1" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#0B0C12" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mqar-vignette" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000" stop-opacity="0.15"/>
+      <stop offset="55%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.45"/>
+    </linearGradient>
+    <linearGradient id="mqar-fall" x1="0" y1="70" x2="0" y2="330" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#6366F1" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0.42"/>
+    </linearGradient>
+    <filter id="mqar-soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.2" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Full-bleed field -->
+  <rect width="640" height="400" fill="#0B0C12"/>
+  <rect width="640" height="400" fill="url(#mqar-glow)"/>
+  <rect width="640" height="400" fill="url(#mqar-vignette)"/>
+
+  <!-- Faint plot rails (atmosphere, not a lab chart) -->
+  <g stroke="rgba(255,255,255,0.06)" stroke-width="1">
+    <line x1="36" y1="110" x2="400" y2="110"/>
+    <line x1="36" y1="200" x2="400" y2="200"/>
+    <line x1="36" y1="290" x2="400" y2="290"/>
+  </g>
+
+  <!-- Collapse area -->
+  <path d="M48 118 C110 118, 150 210, 210 248 C270 286, 320 308, 390 318 L390 340 L48 340 Z" fill="url(#mqar-fall)"/>
+
+  <!-- Attention ceiling (thin dashed) -->
+  <path d="M48 118 L390 118" stroke="rgba(255,255,255,0.28)" stroke-width="2.5" stroke-dasharray="7 8" stroke-linecap="round"/>
+
+  <!-- Diagonal / holo collapse -->
+  <path d="M48 118 C110 118, 150 210, 210 248 C270 286, 320 308, 390 318" stroke="#818CF8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#mqar-soft)"/>
+
+  <!-- Matrix-delta hold -->
+  <path d="M48 118 C140 122, 230 128, 300 126 C340 125, 370 123, 390 122" stroke="#FFFFFF" stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- End dots -->
+  <circle cx="390" cy="118" r="5" fill="rgba(255,255,255,0.35)"/>
+  <circle cx="390" cy="318" r="7" fill="#818CF8"/>
+  <circle cx="390" cy="122" r="9" fill="#FFFFFF" stroke="rgba(255,255,255,0.55)" stroke-width="2"/>
+
+  <!-- Eyebrow -->
+  <text x="36" y="48" fill="rgba(255,255,255,0.45)" font-size="14" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="600" letter-spacing="0.28em">MQAR</text>
+  <text x="108" y="48" fill="rgba(255,255,255,0.28)" font-size="14" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="500" letter-spacing="0.08em">· LAB STACK</text>
+
+  <!-- Punch line -->
+  <text x="36" y="372" fill="rgba(255,255,255,0.55)" font-size="15" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="500" letter-spacing="-0.01em">Content address holds. Diagonal dies.</text>
+
+  <!-- Hero score block (YouTube-thumb read) -->
+  <g transform="translate(420 96)">
+    <text x="0" y="0" fill="rgba(255,255,255,0.38)" font-size="13" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="600" letter-spacing="0.18em">MATRIX-DELTA</text>
+    <text x="0" y="78" fill="#FFFFFF" font-size="78" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="700" letter-spacing="-0.04em">0.971</text>
+    <line x1="0" y1="108" x2="180" y2="108" stroke="rgba(255,255,255,0.14)" stroke-width="1.5"/>
+    <text x="0" y="140" fill="rgba(165,180,252,0.85)" font-size="13" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="600" letter-spacing="0.16em">DIAGONAL / HOLO</text>
+    <text x="0" y="196" fill="#A5B4FC" font-size="46" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif" font-weight="700" letter-spacing="-0.03em">~0.25</text>
   </g>
 </svg>

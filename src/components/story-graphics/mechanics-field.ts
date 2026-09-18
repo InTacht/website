@@ -5,9 +5,9 @@ export const ROWS = 9;
 export const AREA = { x: 28, y: 32, w: 504, h: 148 };
 
 export const SOURCES = [
-  { c: 5, r: 4, mark: "the" },
-  { c: 14, r: 4, mark: "cat" },
-  { c: 22, r: 4, mark: "sat" },
+  { c: 5, r: 4, mark: "data" },
+  { c: 14, r: 4, mark: "files" },
+  { c: 22, r: 4, mark: "tools" },
 ] as const;
 
 export type Source = (typeof SOURCES)[number];
@@ -156,8 +156,17 @@ export function dropPacket(x: number, yTarget: number, t: number, u: number) {
   };
 }
 
-export function nearestSource(x: number) {
-  let best = SOURCES[0];
+export function routePath(
+  from: { x: number; y: number },
+  to: { x: number; y: number },
+) {
+  const lift = svgNum((from.y + to.y) / 2 - 18);
+  const mid = svgNum((from.x + to.x) / 2);
+  return `M${from.x.toFixed(1)} ${from.y.toFixed(1)} Q${mid.toFixed(1)} ${lift.toFixed(1)} ${to.x.toFixed(1)} ${to.y.toFixed(1)}`;
+}
+
+export function nearestSource(x: number): Source {
+  let best: Source = SOURCES[0];
   let dist = Number.POSITIVE_INFINITY;
   for (const src of SOURCES) {
     const dx = Math.abs(sourcePoint(src).x - x);

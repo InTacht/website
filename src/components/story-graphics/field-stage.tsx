@@ -17,6 +17,8 @@ type FieldStageProps = {
   spread: number;
   sourceMode?: "drop" | "emit" | "quiet";
   showLabels?: boolean;
+  leftMark?: string;
+  rightMark?: string;
   children?: ReactNode;
 };
 
@@ -69,6 +71,8 @@ export function FieldStage({
   spread,
   sourceMode = "quiet",
   showLabels = true,
+  leftMark = "WORK",
+  rightMark = "DATA →",
   children,
 }: FieldStageProps) {
   const bloom = bloomRadii(spread);
@@ -165,27 +169,31 @@ export function FieldStage({
           </g>
         );
       })}
-      <text
-        x={AREA.x + 10}
-        y={AREA.y + 16}
-        fill="rgba(255,255,255,0.34)"
-        fontFamily="var(--font-inter), system-ui, sans-serif"
-        fontSize="9"
-        letterSpacing="1.8"
-      >
-        FIELD
-      </text>
-      <text
-        x={AREA.x + AREA.w - 8}
-        y={AREA.y + AREA.h - 10}
-        textAnchor="end"
-        fill="rgba(255,255,255,0.34)"
-        fontFamily="var(--font-inter), system-ui, sans-serif"
-        fontSize="9"
-        letterSpacing="1.8"
-      >
-        WORDS →
-      </text>
+      {leftMark ? (
+        <text
+          x={AREA.x + 10}
+          y={AREA.y + 16}
+          fill="rgba(255,255,255,0.34)"
+          fontFamily="var(--font-inter), system-ui, sans-serif"
+          fontSize="9"
+          letterSpacing="1.8"
+        >
+          {leftMark}
+        </text>
+      ) : null}
+      {rightMark ? (
+        <text
+          x={AREA.x + AREA.w - 8}
+          y={AREA.y + AREA.h - 10}
+          textAnchor="end"
+          fill="rgba(255,255,255,0.34)"
+          fontFamily="var(--font-inter), system-ui, sans-serif"
+          fontSize="9"
+          letterSpacing="1.8"
+        >
+          {rightMark}
+        </text>
+      ) : null}
       {children}
     </svg>
   );

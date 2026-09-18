@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="Cascade dies by load between 7 and 11 bindings, not by depth.">
+  <rect width="640" height="400" fill="#0C1018"/>
+  <text x="40" y="48" fill="#FDBA74" font-size="13" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="700" letter-spacing="0.24em">LOAD · NOT DEPTH</text>
+  <!-- columns of hop health -->
+  <g>
+    <rect x="60" y="100" width="70" height="200" fill="#FB923C" fill-opacity="0.85"/>
+    <text x="95" y="320" text-anchor="middle" fill="#FDBA74" font-size="12" font-family="ui-sans-serif,system-ui,sans-serif">nd1</text>
+    <rect x="160" y="140" width="70" height="160" fill="#F97316" fill-opacity="0.75"/>
+    <text x="195" y="320" text-anchor="middle" fill="#FDBA74" font-size="12" font-family="ui-sans-serif,system-ui,sans-serif">nd4</text>
+    <rect x="260" y="220" width="70" height="80" fill="#EA580C" fill-opacity="0.55"/>
+    <text x="295" y="320" text-anchor="middle" fill="#FDBA74" font-size="12" font-family="ui-sans-serif,system-ui,sans-serif">nd8</text>
+    <rect x="360" y="270" width="70" height="30" fill="#9A3412" fill-opacity="0.5"/>
+    <text x="395" y="320" text-anchor="middle" fill="rgba(253,186,116,0.45)" font-size="12" font-family="ui-sans-serif,system-ui,sans-serif">floor</text>
+  </g>
+  <text x="460" y="160" fill="#FFFFFF" font-size="56" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="900" letter-spacing="-0.03em">7–11</text>
+  <text x="460" y="200" fill="#FDBA74" font-size="14" font-family="ui-sans-serif,system-ui,sans-serif" font-weight="600">bindings / doc</text>
+  <text x="460" y="240" fill="rgba(255,255,255,0.4)" font-size="14" font-family="ui-sans-serif,system-ui,sans-serif">k=3 hops</text>
+  <text x="40" y="370" fill="rgba(253,186,116,0.55)" font-size="14" font-family="ui-sans-serif,system-ui,sans-serif">Depth 5 still learned. Crowding killed the cascade.</text>
+</svg>
