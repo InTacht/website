@@ -1,22 +1,15 @@
 "use client";
 
-import type { ResearchArticle } from "@/lib/research";
+import type { BlogArticle } from "@/lib/blog";
+import { formatBlogDate } from "@/lib/blog";
 import Link from "next/link";
 
-type ResearchCardProps = {
-  article: ResearchArticle;
+type BlogCardProps = {
+  article: BlogArticle;
   className?: string;
 };
 
-function CoverMedia({
-  src,
-  fallbackSrc,
-  label,
-}: {
-  src: string;
-  fallbackSrc?: string;
-  label: string;
-}) {
+function CoverMedia({ src, label }: { src: string; label: string }) {
   const isSvg = src.endsWith(".svg");
 
   return (
@@ -30,16 +23,9 @@ function CoverMedia({
         }`}
         onError={(event) => {
           const img = event.currentTarget;
-          if (fallbackSrc && img.dataset.fallback !== "1") {
-            img.dataset.fallback = "1";
-            img.src = fallbackSrc;
-            img.classList.remove("bg-[#0B0C12]");
-            img.classList.add("object-cover");
-            return;
-          }
           img.style.display = "none";
           const fallback = img.parentElement?.querySelector(
-            "[data-research-cover-fallback]",
+            "[data-blog-cover-fallback]",
           );
           if (fallback instanceof HTMLElement) {
             fallback.hidden = false;
@@ -51,7 +37,7 @@ function CoverMedia({
       <div
         hidden
         aria-hidden
-        data-research-cover-fallback
+        data-blog-cover-fallback
         className="absolute inset-0 flex-col items-center justify-center gap-2 bg-[#0D0E15] px-6 text-center"
       >
         <span className="text-[11px] font-light uppercase tracking-[0.22em] text-white/35">
@@ -65,26 +51,19 @@ function CoverMedia({
   );
 }
 
-export function ResearchCard({
-  article,
-  className = "",
-}: ResearchCardProps) {
+export function BlogCard({ article, className = "" }: BlogCardProps) {
   return (
-    <Link
-      href={`/research/${article.slug}`}
-      className={`group block h-full ${className}`}
-    >
+    <Link href={`/blog/${article.slug}`} className={`group block h-full ${className}`}>
       <figure className="flex h-full flex-col overflow-hidden border border-white/10 bg-white/[0.02] transition-[border-color] duration-300 group-hover:border-white/25">
         <div className="relative aspect-[16/10] min-h-[140px]">
-          <CoverMedia
-            src={article.cover}
-            fallbackSrc={article.coverFallback}
-            label={article.title}
-          />
+          <CoverMedia src={article.cover} label={article.title} />
         </div>
         <figcaption className="flex flex-1 flex-col border-t border-white/10 bg-white/[0.12] px-4 py-3.5 transition-colors duration-300 group-hover:bg-white/[0.16] md:px-5">
           <p className="font-display text-base font-normal leading-snug tracking-[-0.02em] text-white md:text-lg">
             {article.title}
+          </p>
+          <p className="mt-2 text-[11px] font-light uppercase tracking-[0.18em] text-white/40">
+            {formatBlogDate(article.date)}
           </p>
         </figcaption>
       </figure>

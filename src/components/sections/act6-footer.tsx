@@ -7,7 +7,7 @@ import { act6 } from "@/lib/field-iq-content";
 
 export function Act6Footer() {
   return (
-    <StorySection id="act-6" labelledBy="act6-headline" className="pb-40 md:pb-52">
+    <StorySection id="act-6" labelledBy="act6-headline" className="pb-16 md:pb-20">
       <div className="relative mx-auto max-w-3xl text-center">
         <div
           aria-hidden

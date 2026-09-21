@@ -1,8 +1,7 @@
 "use client";
 
 import { useLenis } from "lenis/react";
-import { useStoredResearchOrigin } from "@/components/nav-back";
-import { ResearchCard } from "@/components/research/research-card";
+import { BlogCard } from "@/components/blog/blog-card";
 import { CtaLink } from "@/components/ui/cta";
 import {
   useCallback,
@@ -12,12 +11,12 @@ import {
   type ReactNode,
 } from "react";
 import {
-  getRelatedArticles,
-  researchKindLabel,
-  type ResearchArticle as ResearchArticleData,
-  type ResearchSection,
-  type ResearchTable,
-} from "@/lib/research";
+  formatBlogDate,
+  getBlogChapterId,
+  getRelatedBlogArticles,
+  type BlogArticle as BlogArticleData,
+  type BlogChapter,
+} from "@/lib/blog";
 
 const TOP_OFFSET = -72;
 const ENTER_INSET = 96;
@@ -27,14 +26,6 @@ type PathItem = {
   index: string;
   label: string;
 };
-
-function sectionId(heading: string, index: number) {
-  const slug = heading
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-  return `s${String(index + 1).padStart(2, "0")}-${slug.slice(0, 48)}`;
-}
 
 /** Compact TOC label: prefer text before a colon, then cap at 3 words. */
 function shortNavLabel(heading: string, maxWords = 3): string {
@@ -112,15 +103,67 @@ function Body({ children }: { children: ReactNode }) {
   );
 }
 
-function CoverPlate({
-  src,
-  fallbackSrc,
-  label,
+function CloseLine({ children }: { children: ReactNode }) {
+  return (
+    <p className="mt-8 max-w-2xl text-base font-light leading-relaxed text-white/65 md:text-[17px]">
+      {children}
+    </p>
+  );
+}
+
+function PointList({
+  items,
 }: {
-  src: string;
-  fallbackSrc?: string;
-  label: string;
+  items: readonly {
+    title: string;
+    body: readonly string[];
+    bullets: readonly string[];
+  }[];
 }) {
+  if (items.length === 0) return null;
+  return (
+    <dl className="mt-8 max-w-2xl divide-y divide-white/10 border-y border-white/10">
+      {items.map((item) => (
+        <div
+          key={item.title}
+          className="grid gap-2 py-5 sm:grid-cols-[9rem_1fr] sm:gap-6"
+        >
+          <dt className="text-sm font-medium tracking-tight text-white">
+            {item.title}
+          </dt>
+          <dd className="space-y-3">
+            {item.body.map((paragraph) => (
+              <p
+                key={paragraph.slice(0, 64)}
+                className="text-sm font-light leading-relaxed text-white/55 md:text-[15px]"
+              >
+                {paragraph}
+              </p>
+            ))}
+            {item.bullets.length > 0 ? (
+              <ul className="space-y-2">
+                {item.bullets.map((bullet) => (
+                  <li
+                    key={bullet.slice(0, 64)}
+                    className="flex gap-3 text-sm font-light leading-relaxed text-white/55 md:text-[15px]"
+                  >
+                    <span
+                      aria-hidden
+                      className="mt-[0.55em] h-px w-3 shrink-0 bg-white/30"
+                    />
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+function CoverPlate({ src, label }: { src: string; label: string }) {
   return (
     <figure
       aria-label={label}
@@ -132,109 +175,80 @@ function CoverPlate({
           src={src}
           alt=""
           className="absolute inset-0 size-full object-cover object-center"
-          onError={(event) => {
-            const img = event.currentTarget;
-            if (fallbackSrc && img.dataset.fallback !== "1") {
-              img.dataset.fallback = "1";
-              img.src = fallbackSrc;
-            }
-          }}
         />
       </div>
     </figure>
   );
 }
 
-function LedgerTable({ table }: { table: ResearchTable }) {
+function BulletList({ items }: { items: readonly string[] }) {
+  if (items.length === 0) return null;
   return (
-    <figure className="mt-8 max-w-2xl">
-      <div className="divide-y divide-white/10 border-y border-white/10">
-        <div className="grid gap-2 py-3 sm:grid-cols-[9rem_1fr_1fr] sm:gap-6">
-          {table.columns.map((column) => (
-            <p
-              key={column}
-              className="text-[11px] font-light uppercase tracking-[0.18em] text-white/35"
-            >
-              {column}
-            </p>
-          ))}
-        </div>
-        {table.rows.map((row) => (
-          <div
-            key={row.join("|")}
-            className="grid gap-1 py-4 sm:grid-cols-[9rem_1fr_1fr] sm:gap-6"
+    <div className="mt-8 max-w-2xl">
+      <ul className="space-y-2.5">
+        {items.map((item) => (
+          <li
+            key={item.slice(0, 64)}
+            className="flex gap-3 text-sm font-light leading-relaxed text-white/55 md:text-[15px]"
           >
-            {row.map((cell, index) => (
-              <p
-                key={`${row[0]}-${index}`}
-                className={
-                  index === 0
-                    ? "text-sm font-medium tracking-tight text-white"
-                    : "text-sm font-light leading-relaxed text-white/55 md:text-[15px]"
-                }
-              >
-                {cell}
-              </p>
-            ))}
-          </div>
+            <span
+              aria-hidden
+              className="mt-[0.55em] h-px w-3 shrink-0 bg-white/30"
+            />
+            <span>{item}</span>
+          </li>
         ))}
-      </div>
-      <figcaption className="mt-3 text-[11px] font-light leading-relaxed tracking-wide text-white/30">
-        {table.caption}
-      </figcaption>
-    </figure>
+      </ul>
+    </div>
   );
 }
 
-function SectionBlock({
-  section,
+function ChapterBlock({
+  chapter,
   index,
-  articleCover,
-  kicker,
   flushTop = false,
+  isLast = false,
 }: {
-  section: ResearchSection;
+  chapter: BlogChapter;
   index: number;
-  articleCover: string;
-  kicker: string;
   flushTop?: boolean;
+  isLast?: boolean;
 }) {
-  const id = sectionId(section.heading, index);
+  const id = getBlogChapterId(chapter, index);
   const headlineId = `${id}-headline`;
-  const [lead, ...rest] = section.body;
-  const showFigure =
-    section.figure && section.figure.src !== articleCover;
+  const hasHeading = Boolean(chapter.heading);
+  const [lead, ...rest] = chapter.body;
+  const close =
+    isLast && rest.length > 0 ? rest[rest.length - 1] : null;
+  const bodyParas =
+    close && rest.length > 0 ? rest.slice(0, -1) : rest;
 
   return (
     <Chapter id={id} labelledBy={headlineId} flushTop={flushTop}>
-      <ChapterHead
-        index={String(index + 1).padStart(2, "0")}
-        kicker={kicker}
-        headlineId={headlineId}
-        headline={section.heading}
-      />
+      {hasHeading ? (
+        <ChapterHead
+          index={String(index + 1).padStart(2, "0")}
+          kicker="Essay"
+          headlineId={headlineId}
+          headline={chapter.heading}
+        />
+      ) : (
+        <h2 id={headlineId} className="sr-only">
+          Opening
+        </h2>
+      )}
       {lead ? <Idea>{lead}</Idea> : null}
-      {showFigure && section.figure ? (
-        <div className="mt-8 max-w-2xl">
-          <CoverPlate
-            src={section.figure.src}
-            fallbackSrc={section.figure.fallbackSrc}
-            label={section.figure.label}
-          />
-          <p className="mt-3 text-[11px] font-light uppercase tracking-[0.18em] text-white/35">
-            {section.figure.label}
-          </p>
-        </div>
-      ) : null}
-      {rest.map((paragraph) => (
-        <Body key={paragraph.slice(0, 48)}>{paragraph}</Body>
+      <PointList items={chapter.points} />
+      {bodyParas.map((paragraph) => (
+        <Body key={paragraph.slice(0, 64)}>{paragraph}</Body>
       ))}
-      {section.table ? <LedgerTable table={section.table} /> : null}
+      <BulletList items={chapter.bullets} />
+      {close ? <CloseLine>{close}</CloseLine> : null}
     </Chapter>
   );
 }
 
-function useResearchActiveChapter(items: readonly PathItem[]) {
+function useBlogActiveChapter(items: readonly PathItem[]) {
   const lenis = useLenis();
   const [active, setActive] = useState(items[0]?.id ?? "");
   const activeRef = useRef(active);
@@ -290,9 +304,9 @@ function useResearchActiveChapter(items: readonly PathItem[]) {
   return { active, setActive, activeRef, resolveIndex, jumpTo };
 }
 
-function ResearchMobileRail({ items }: { items: readonly PathItem[] }) {
+function BlogMobileRail({ items }: { items: readonly PathItem[] }) {
   const { active, setActive, activeRef, resolveIndex, jumpTo } =
-    useResearchActiveChapter(items);
+    useBlogActiveChapter(items);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -356,9 +370,9 @@ function ResearchMobileRail({ items }: { items: readonly PathItem[] }) {
   );
 }
 
-function ResearchReadingPath({ items }: { items: readonly PathItem[] }) {
+function BlogReadingPath({ items }: { items: readonly PathItem[] }) {
   const { active, setActive, activeRef, resolveIndex, jumpTo } =
-    useResearchActiveChapter(items);
+    useBlogActiveChapter(items);
   const listRef = useRef<HTMLOListElement>(null);
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const markerRef = useRef<HTMLSpanElement>(null);
@@ -495,51 +509,31 @@ function ResearchReadingPath({ items }: { items: readonly PathItem[] }) {
   );
 }
 
-export function ResearchArticleView({
-  article,
-}: {
-  article: ResearchArticleData;
-}) {
-  const related = getRelatedArticles(article);
-  const origin = useStoredResearchOrigin();
-  const researchIndexHref =
-    origin === "thesis" ? "/research?from=thesis" : "/research?from=home";
-  const pathItems: PathItem[] = [
-    ...article.sections.map((section, index) => ({
-      id: sectionId(section.heading, index),
+export function BlogArticleView({ article }: { article: BlogArticleData }) {
+  const related = getRelatedBlogArticles(article);
+  const pathItems = article.chapters
+    .map((chapter, index) => ({
+      id: getBlogChapterId(chapter, index),
       index: String(index + 1).padStart(2, "0"),
-      label: shortNavLabel(section.heading),
-    })),
-    ...(article.citations?.length
-      ? [
-          {
-            id: "references",
-            index: String(article.sections.length + 1).padStart(2, "0"),
-            label: "References",
-          },
-        ]
-      : []),
-  ];
-
-  const kindLabel = researchKindLabel[article.kind];
+      label: chapter.heading
+        ? shortNavLabel(chapter.heading)
+        : "Opening",
+    }))
+    .filter((item) => item.label !== "Opening");
 
   return (
     <div className="pt-24">
       <div className="relative mx-auto max-w-6xl px-8 md:px-14 lg:px-16">
         <div className="relative">
-          <article className="min-w-0 max-w-3xl xl:max-w-[42rem]">
-            <CoverPlate
-              src={article.cover}
-              fallbackSrc={article.coverFallback}
-              label={article.title}
-            />
-            <ResearchMobileRail items={pathItems} />
+          <article className="thesis-article min-w-0 max-w-3xl xl:max-w-[42rem]">
+            <CoverPlate src={article.cover} label={article.title} />
+            <BlogMobileRail items={pathItems} />
 
             <header className="scroll-mt-28 pb-10 pt-10 md:scroll-mt-24 md:pb-12 md:pt-12">
               <p className="mb-3 text-[11px] font-light uppercase tracking-[0.22em] text-white/40">
-                {kindLabel}
+                Blog
                 <span className="text-white/20"> · </span>
-                {article.date}
+                {formatBlogDate(article.date)}
               </p>
               <h1
                 id="article-headline"
@@ -550,51 +544,18 @@ export function ResearchArticleView({
               <Idea>{article.lead}</Idea>
             </header>
 
-            {article.sections.map((section, index) => (
-              <SectionBlock
-                key={section.heading}
-                section={section}
+            {article.chapters.map((chapter, index) => (
+              <ChapterBlock
+                key={getBlogChapterId(chapter, index)}
+                chapter={chapter}
                 index={index}
-                articleCover={article.cover}
-                kicker={kindLabel}
                 flushTop={index === 0}
+                isLast={index === article.chapters.length - 1}
               />
             ))}
-
-            {article.citations && article.citations.length > 0 ? (
-              <Chapter id="references" labelledBy="references-headline">
-                <ChapterHead
-                  index={String(article.sections.length + 1).padStart(2, "0")}
-                  kicker="Sources"
-                  headlineId="references-headline"
-                  headline="References"
-                />
-                <dl className="mt-8 max-w-2xl divide-y divide-white/10 border-y border-white/10">
-                  {article.citations.map((citation) => (
-                    <div key={citation.href} className="py-4">
-                      <dt>
-                        <a
-                          href={citation.href}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-sm font-medium tracking-tight text-white transition hover:text-white/80"
-                        >
-                          {citation.title}
-                        </a>
-                      </dt>
-                      {citation.venue ? (
-                        <dd className="mt-1.5 text-sm font-light leading-relaxed text-white/45">
-                          {citation.venue}
-                        </dd>
-                      ) : null}
-                    </div>
-                  ))}
-                </dl>
-              </Chapter>
-            ) : null}
           </article>
 
-          <ResearchReadingPath items={pathItems} />
+          <BlogReadingPath items={pathItems} />
         </div>
 
         {related.length > 0 ? (
@@ -604,22 +565,22 @@ export function ResearchArticleView({
             </p>
             <div className="flex flex-wrap items-end justify-between gap-4">
               <h2 className="font-display text-2xl font-normal tracking-[-0.02em] text-white md:text-3xl">
-                Continue on the ledger
+                More from the blog
               </h2>
-              <CtaLink href={researchIndexHref} variant="secondary">
-                All research
+              <CtaLink href="/blog" variant="secondary">
+                All posts
               </CtaLink>
             </div>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
               {related.map((item) => (
-                <ResearchCard key={item.slug} article={item} />
+                <BlogCard key={item.slug} article={item} />
               ))}
             </div>
           </section>
         ) : (
           <div className="flex justify-end border-t border-white/10 py-12 md:py-14">
-            <CtaLink href={researchIndexHref} variant="secondary">
-              All research
+            <CtaLink href="/blog" variant="secondary">
+              All posts
             </CtaLink>
           </div>
         )}

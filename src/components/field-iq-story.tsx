@@ -4,6 +4,7 @@ import { Act3Mechanics } from "@/components/sections/act3-mechanics";
 import { Act4EngineRoom } from "@/components/sections/act4-engine-room";
 import { Act5Impact } from "@/components/sections/act5-impact";
 import { Act6Footer } from "@/components/sections/act6-footer";
+import { ContactSection } from "@/components/contact-section";
 import { StoryMeadowFrame } from "@/components/story-meadow";
 
 /**
@@ -20,6 +21,7 @@ export function FieldIqStory() {
       <Act4EngineRoom />
       <Act5Impact />
       <Act6Footer />
+      <ContactSection />
     </StoryMeadowFrame>
   );
 }

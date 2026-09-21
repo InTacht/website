@@ -68,7 +68,7 @@ export function useStoredResearchOrigin(): ResearchOrigin {
 export function ResearchBackLink() {
   const pathname = usePathname();
   const origin = useResearchOrigin();
-  const isArticle = Boolean(pathname && pathname !== "/research");
+  const isArticle = Boolean(pathname && pathname.startsWith("/research/"));
 
   if (isArticle) {
     const href =
@@ -88,6 +88,17 @@ export function ResearchBackLink() {
   return (
     <Link
       href={href}
+      className="shrink-0 text-[11px] font-light uppercase tracking-[0.22em] text-white/45 transition hover:text-white"
+    >
+      Back
+    </Link>
+  );
+}
+
+export function BlogBackLink() {
+  return (
+    <Link
+      href="/blog"
       className="shrink-0 text-[11px] font-light uppercase tracking-[0.22em] text-white/45 transition hover:text-white"
     >
       Back

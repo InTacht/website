@@ -1,0 +1,152 @@
+{
+  "slug": "history-of-databases",
+  "date": "2026-01-01",
+  "related": [
+    "databricks-lakebase-ltap",
+    "changing-ai-landscape-slms"
+  ],
+  "title": "The Complete History of Databases: From Punch Cards to Vector Search",
+  "excerpt": "To understand how data works today, it helps to look at how databases have changed over time. This article walks through the main stages in the history of…",
+  "lead": "To understand how data works today, look at how databases changed over time. Each stage rewrote how people store, manage, and trust information.",
+  "cover": "/assets/blog/thumbs/history-of-databases.svg",
+  "sections": [
+    {
+      "heading": "The Mechanical Age",
+      "level": 2,
+      "body": [
+        "In 1801, Joseph Marie Jacquard built a loom controlled by punched cards. Holes encoded instructions. Different card sequences produced different fabric designs.",
+        "The loom was not a database. It showed that information could live outside the machine, be reused, and drive automatic work. Separating instructions from hardware shaped later mechanical and electronic systems."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Hollerith and the Census",
+      "level": 2,
+      "body": [
+        "By the 1880s the U.S. census was so large that hand counting took years. Results risked being obsolete before they finished.",
+        "Herman Hollerith built electromechanical tabulators that read, sorted, and counted punched cards. The 1890 census ran far faster and cheaper. His company later became part of IBM. Punched cards stayed a standard medium for decades."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Magnetic Tape",
+      "level": 2,
+      "body": [
+        "Punched cards filled rooms, damaged easily, and slowed at scale. Organizations needed denser storage.",
+        "In the 1950s magnetic tape and early electronic computers took over. Data became magnetic patterns on reels. Reads and writes got faster. Large datasets became easier to move and copy. Storage shifted from paper to electronics."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Bachman and Network Databases",
+      "level": 2,
+      "body": [
+        "Even on tape, finding one record could mean scanning large stretches of media.",
+        "In the 1960s Charles Bachman built the Integrated Data Store at GE. IDS used a network model: records linked by predefined paths programs could follow instead of full scans. It is often called one of the first true database management systems. Bachman received the Turing Award in 1973."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "SABRE and Real-Time Reservations",
+      "level": 2,
+      "body": [
+        "American Airlines and IBM built SABRE to replace paper cards and phone bookings.",
+        "SABRE ran on IBM mainframes and gave agents a central system for availability and bookings. By the mid-1960s it handled tens of thousands of calls a day and cut booking times from minutes to seconds.",
+        "In the 1980s investigations found display bias favoring American flights. Regulators banned biased ranking in computer reservation systems. Large databases can encode advantage as well as efficiency.",
+        "SABRE proved databases could carry heavy real-time transaction load. It also showed how tightly early systems were bound to one application, making change hard."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Codd and the Relational Model",
+      "level": 2,
+      "body": [
+        "By the late 1960s commercial databases were hierarchical or network. Programmers navigated fixed paths. Schema change meant rewriting programs.",
+        "In 1970 Edgar F. Codd at IBM published the relational model: data in tables, grounded in set theory and logic. Users describe what they want. The system chooses how to fetch it.",
+        "Logical view separated from physical storage. Querying got simpler. Schemas could change more safely. Over time the model became the dominant design."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "INGRES, System R, and SQL",
+      "level": 2,
+      "body": [
+        "Industry first treated the relational model as academic or too slow. IBM had IMS and moved carefully.",
+        "At UC Berkeley, INGRES showed relational systems could be practical. Alumni later shaped Oracle, Sybase, and Informix.",
+        "IBM’s System R implemented relational databases for business work. Chamberlin and Boyce designed SQL so queries looked like simple English instead of low-level code.",
+        "By the late 1970s both projects proved relational systems could work. IBM still moved slowly to market, leaving room for others."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Oracle, DB2, and the Database Wars",
+      "level": 2,
+      "body": [
+        "Larry Ellison, Bob Miner, and Ed Oates founded what became Oracle to ship a commercial SQL database. The first product landed around 1979, ahead of comparable IBM offerings.",
+        "Oracle ran across cheaper machines and grew with minicomputers and Unix. It went public in 1986.",
+        "IBM answered with DB2 for mainframe customers. Portability versus installed base defined the fight.",
+        "In 1986 SQL became an ANSI standard. Applications moved more easily across vendors. By decade’s end relational SQL was the enterprise norm, while SABRE still warned that systems carry policy as well as data."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "The Web and Objects",
+      "level": 2,
+      "body": [
+        "By the 1990s Oracle, IBM, and peers had made SQL the common language. Then the Web brought multimedia, hyperlinks, and nested objects that resisted neat rows and columns.",
+        "Developers hit the object-relational impedance mismatch: applications thought in objects, databases thought in tables. Translation was slow and brittle.",
+        "Object databases briefly looked like the future. Objectivity and Versant promised native objects. Capital followed.",
+        "The revolution stalled. Relational systems were too entrenched. Object stores found niches. The mainstream stayed with tables. The model strained under the Web. It did not break."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "NoSQL and Scale",
+      "level": 2,
+      "body": [
+        "In the 2000s pressure shifted from structure to scale. Google and Amazon needed data across many machines. Classic relational deployments assumed one powerful server or tight clusters.",
+        "Google’s Bigtable paper in 2006 and Amazon’s Dynamo paper in 2007 pushed horizontal scale, replication, and partitioning, sometimes at the cost of strict transactions.",
+        "Cassandra, MongoDB, and peers formed the NoSQL wave: often BASE over strict ACID, availability and eventual consistency over immediate consistency.",
+        "Modern apps mix tools. One system may use relational storage for transactions, a key-value cache, a search engine, and a graph store. The database layer became a set of specialized components."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Cloud Databases",
+      "level": 2,
+      "body": [
+        "In the 2010s cloud changed deployment. Teams stopped owning every box and bought managed services.",
+        "DynamoDB, Firestore, Cosmos DB, and peers offered automatic scale, replication, and backups. Capacity flexed. Operators handled less. Smaller teams reached global systems."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "AI and Vectors",
+      "level": 2,
+      "body": [
+        "In the 2020s machine learning and large language models pushed vector databases into the mainstream. Systems store high-dimensional embeddings for text, images, and audio, not only exact values.",
+        "Pinecone, Milvus, and peers support semantic search, recommendations, and retrieval-augmented generation.",
+        "Developers now treat databases as an ecosystem. In January 2023 an FAA NOTAM database failure briefly halted U.S. domestic flights. Critical infrastructure depends on reliable data systems.",
+        "Data volumes keep rising. Databases remain the structure that lets that volume be stored, queried, and trusted."
+      ],
+      "bullets": [
+        "Relational databases such as PostgreSQL or MySQL for core transactions.",
+        "Key-value stores such as Redis for caching and fast lookups.",
+        "Search engines such as Elasticsearch or OpenSearch for text and analytics.",
+        "Graph databases such as Neo4j for complex relationships.",
+        "Time-series databases for metrics and sensors.",
+        "Vector databases for similarity search over embeddings."
+      ]
+    },
+    {
+      "heading": "The Ongoing Question",
+      "level": 2,
+      "body": [
+        "From Jacquard’s cards to vector indexes, the core problem stayed the same: organize information so machines process it efficiently and people can trust the result.",
+        "Each generation fixed the limits of the last and introduced new trade-offs: mechanical, electromechanical, relational, NoSQL, cloud, AI-oriented.",
+        "Databases moved from cards to mainframes to clusters to global cloud. They sit under payments, navigation, communication, and the open web. Future designs will keep adapting to larger scales, new types, and higher bars for reliability and understanding."
+      ],
+      "bullets": []
+    }
+  ]
+}

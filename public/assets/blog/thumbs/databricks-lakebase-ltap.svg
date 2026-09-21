@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="">
+  <rect width="640" height="400" fill="#0B0C12"/>
+  <rect x="72" y="88" width="200" height="224" rx="4" stroke="#3DDC97" stroke-width="1.5" fill="rgba(61,220,151,0.06)"/>
+  <rect x="368" y="88" width="200" height="224" rx="4" stroke="#3DDC97" stroke-width="1.5" fill="rgba(61,220,151,0.04)"/>
+  <path d="M272 160 H368 M272 200 H368 M272 240 H368" stroke="#3DDC97" stroke-width="1.25" stroke-opacity="0.55"/>
+  <circle cx="272" cy="160" r="4" fill="#3DDC97"/>
+  <circle cx="368" cy="160" r="4" fill="#3DDC97"/>
+  <circle cx="272" cy="200" r="4" fill="#3DDC97"/>
+  <circle cx="368" cy="200" r="4" fill="#3DDC97"/>
+  <circle cx="272" cy="240" r="4" fill="#3DDC97"/>
+  <circle cx="368" cy="240" r="4" fill="#3DDC97"/>
+  <rect x="108" y="128" width="128" height="10" rx="2" fill="#3DDC97" fill-opacity="0.35"/>
+  <rect x="108" y="156" width="96" height="8" rx="2" fill="#3DDC97" fill-opacity="0.2"/>
+  <rect x="108" y="180" width="112" height="8" rx="2" fill="#3DDC97" fill-opacity="0.2"/>
+  <rect x="404" y="128" width="48" height="144" fill="#3DDC97" fill-opacity="0.18"/>
+  <rect x="464" y="168" width="48" height="104" fill="#3DDC97" fill-opacity="0.28"/>
+  <rect x="524" y="148" width="24" height="124" fill="#3DDC97" fill-opacity="0.4"/>
+</svg>

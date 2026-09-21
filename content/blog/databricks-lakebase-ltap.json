@@ -1,0 +1,278 @@
+{
+  "slug": "databricks-lakebase-ltap",
+  "date": "2026-06-23",
+  "related": [
+    "history-of-databases",
+    "changing-ai-landscape-slms"
+  ],
+  "title": "Did Databricks Just Crack the 40-Year OLTP vs OLAP Split?",
+  "excerpt": "Databricks is not just adding another database product to its platform. With Lakebase and the newer LTAP architecture, Databricks is making a bigger claim:…",
+  "lead": "Databricks is not just adding another database. With Lakebase and LTAP it claims the boundary between operational databases, analytical lakehouses, streaming, and AI should move down to storage and governance. HTAP systems already tried to bring OLTP and OLAP closer. The honest argument is not that Databricks saw the problem first. It is that Databricks is trying to solve it at a different layer.",
+  "cover": "/assets/blog/thumbs/databricks-lakebase-ltap.svg",
+  "sections": [
+    {
+      "heading": "The Claim",
+      "level": 2,
+      "body": [
+        "HTAP tries to unify OLTP and OLAP inside a database engine. Databricks LTAP tries to unify them inside the lakehouse itself.",
+        "That distinction matters."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "The Old Split",
+      "level": 2,
+      "body": [
+        "Most enterprises still write applications to operational databases, land telemetry elsewhere, then move data into a warehouse or lakehouse through CDC, ETL, streaming, reverse ETL, feature stores, and serving layers.",
+        "The result is too many copies of truth. That is painful for humans. It is worse for AI agents. An agent reads, reasons, writes state, calls tools, and loops. If every loop waits on stale pipelines, the agent is limited by architecture, not by the model.",
+        "That is the problem Lakebase and LTAP aim at."
+      ],
+      "bullets": [
+        "The production database holds operational state.",
+        "The warehouse or lakehouse holds the analytical copy.",
+        "The feature store holds model-serving features.",
+        "The vector database holds embeddings.",
+        "The application cache holds a low-latency serving copy.",
+        "Governance tries to track all of it after the fact."
+      ]
+    },
+    {
+      "heading": "Why HTAP Was the First Answer",
+      "level": 2,
+      "body": [
+        "HTAP means Hybrid Transactional/Analytical Processing: one database for transactions and analytics instead of two systems.",
+        "These systems reduce data movement. If both workloads live on one platform, teams cut pipeline work. The tradeoff: the database stays the center of gravity. Engine, storage, optimizer, consistency, and scale are shaped by that product.",
+        "That can be right for real-time operational analytics. It is not the same as making enterprise data lake-native."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "SingleStore",
+      "level": 3,
+      "body": [
+        "SingleStore describes a distributed HTAP SQL database with unified table storage: fast point reads and writes plus columnar analytical scans, with storage and compute separated and a hot hierarchy across memory, disk, and blob storage."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Snowflake Hybrid Tables",
+      "level": 3,
+      "body": [
+        "Hybrid Tables optimize for low-latency transactional access with a row engine, locking, primary keys, and indexes, while staying inside Snowflake’s query and governance model."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Peer Comparison",
+      "level": 2,
+      "body": [
+        "To judge Databricks fairly, look at earlier attempts. The industry did not ignore the operational–analytical split. It attacked it several serious ways."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "SingleStore: universal storage",
+      "level": 3,
+      "body": [
+        "SingleStore, originally MemSQL, is a strong counterexample to “Databricks solved hybrid first.” It spent years on one engine for operational and analytical work.",
+        "Universal Storage, also described in its SIGMOD paper, evolved the columnstore so it can support transactional patterns too. SingleStore is not a warehouse with a database bolted on. It is one table format for point writes and large scans.",
+        "Its argument against Databricks is predictable: if one engine reads and writes the same data with fresh consistency, why coordinate multiple engines through a shared lake?"
+      ],
+      "bullets": [
+        "New rows land in an in-memory rowstore segment for low-latency writes.",
+        "Data later flushes into immutable on-disk columnstore segments for compression and scans.",
+        "The columnstore is LSM-like, suited to incremental ingestion.",
+        "Secondary hash indexes support point lookups in columnstore data.",
+        "Subsegment access speeds targeted row reads.",
+        "Row-level locking on columnstore tables supports transactional updates and deletes.",
+        "Read-only workspaces isolate heavy analytics from the primary read-write workload."
+      ]
+    },
+    {
+      "heading": "TiDB and TiFlash",
+      "level": 3,
+      "body": [
+        "TiDB is distributed SQL for HTAP, but not one physical layout for every workload. Different storage engines sit under one distributed system.",
+        "TiKV is the row-oriented transactional store. TiFlash is columnar analytics via Raft Learner replicas of TiKV data.",
+        "This solved a real form of the problem before LTAP. TiDB does not erase OLTP/OLAP representation differences. It keeps them inside one architecture with a consistency protocol."
+      ],
+      "bullets": [
+        "TiKV handles transactional writes and row access.",
+        "TiFlash maintains columnar replicas for analytical scans.",
+        "TiFlash replicas are Raft Learners: they take Raft logs but do not vote or join write quorum.",
+        "Replication to TiFlash is asynchronous, so analytics does not block writes.",
+        "TiFlash validates Raft progress and uses MVCC for Snapshot Isolation reads.",
+        "The optimizer can route analytics to TiFlash and transactions to TiKV."
+      ]
+    },
+    {
+      "heading": "Flipkart at e-commerce scale",
+      "level": 3,
+      "body": [
+        "Flipkart adopted TiDB when vertically scaled MySQL was no longer enough. Horizontal scale and MySQL compatibility let apps migrate with minimal change.",
+        "One benchmark reported more than 1 million consistent read QPS at single-digit millisecond latency, plus more than 100K write QPS and about 12K TPS for a workload of ten inserts per transaction.",
+        "Multi-region TiDB used Raft placement for read-after-write consistency, durability, locality, and availability across region failures."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Snowflake Hybrid Tables",
+      "level": 3,
+      "body": [
+        "Snowflake started as a warehouse, then added a row-based table type for operational patterns: low-latency random reads and writes, row locking, enforced keys and constraints, and indexes.",
+        "This is not SingleStore or TiDB. It extends the warehouse toward transactions for lightweight apps, workflow metadata, and low-latency serving of precomputed data. Snowflake still notes standard tables are expected to win on large analytical scans."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "What peers prove",
+      "level": 3,
+      "body": [
+        "Peers change the Databricks story. Databricks did not invent the pain of separate OLTP and OLAP. It did not invent reducing movement or mixing row and columnar access.",
+        "What it tries to make new is the center of gravity. Earlier HTAP kept the database at the center. Databricks wants the lakehouse at the center: Postgres-compatible transactions, analytics, streaming, governance, and AI around open lake storage and Unity Catalog."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "What Makes the Lakehouse Different",
+      "level": 2,
+      "body": [
+        "A lakehouse starts from a different assumption: the durable system of record should be open object storage, not a closed database format.",
+        "On Databricks that means S3, ADLS, or GCS with Delta Lake and Iceberg; Spark, Photon, SQL, ML, streaming, and AI over that layer; Unity Catalog for shared governance, permissions, lineage, discovery, and audit.",
+        "The traditional lakehouse was strongest for analytics and AI. The weak point was operational data. You could ingest, analyze, and train, but the low-latency transactional database still lived outside. Application state and analytical truth stayed separated by pipelines.",
+        "Lakebase is the attempt to close that gap."
+      ],
+      "bullets": [
+        "Ingestion and transformation with Spark, Lakeflow, Auto Loader, and streaming.",
+        "BI and warehouse SQL with Databricks SQL and Photon.",
+        "ML and AI with MLflow, Mosaic AI, features, serving, and vector search.",
+        "Governance across tables, files, models, features, and functions with Unity Catalog."
+      ]
+    },
+    {
+      "heading": "What Lakebase Adds",
+      "level": 2,
+      "body": [
+        "Lakebase is fully managed Postgres on Databricks for transactional work, positioned as Postgres for the lakehouse rather than a standalone database.",
+        "The foundation is Neon-style serverless Postgres: separate compute from storage, elastic compute, durable cloud history. Databricks acquired Neon in 2025 and built Lakebase on that architecture.",
+        "The shift is not that Databricks offers Postgres. The shift is that operational state should participate directly in the lakehouse’s analytical, governance, and AI layers."
+      ],
+      "bullets": [
+        "Low-latency transactions through standard Postgres clients.",
+        "Autoscaling and scale-to-zero compute.",
+        "Instant branching for development and testing.",
+        "Read replicas.",
+        "Point-in-time restore through branches.",
+        "High availability and automatic failover.",
+        "Native Unity Catalog integration.",
+        "Sync from Unity Catalog tables into Postgres for low-latency app reads.",
+        "Postgres changes stored as Delta for pipelines and audit.",
+        "Patterns such as online features and agent state storage."
+      ]
+    },
+    {
+      "heading": "LTAP: The Bigger Claim",
+      "level": 2,
+      "body": [
+        "In 2026 Databricks announced LTAP, Lake Transactional/Analytical Processing. The name echoes HTAP. The architecture does not.",
+        "Databricks frames HTAP as putting both workloads in one engine, and critiques that for collapsing isolation, compromising peak performance, and locking enterprises into a proprietary footprint.",
+        "HTAP says one engine should do transactions and analytics. LTAP says specialized engines can share one governed copy of data in the lake.",
+        "If that works reliably, the lakehouse becomes more than an analytical platform. It becomes an operational substrate for applications and agents."
+      ],
+      "bullets": [
+        "Transactions through standard Postgres semantics via Lakebase.",
+        "Analytics through the lakehouse: Spark, Photon, Databricks SQL.",
+        "Operational, analytical, and streaming data on the same lake storage.",
+        "Unity Catalog as one governance model.",
+        "Delta and Iceberg as the shared representation.",
+        "OLTP–OLAP pipelines removed rather than hidden."
+      ]
+    },
+    {
+      "heading": "Why This Matters for AI",
+      "level": 2,
+      "body": [
+        "The AI case is not decoration. It changes database requirements. Traditional apps needed a database for user state. Analytics could lag. Models trained offline. Dashboards refreshed overnight.",
+        "Agentic applications behave differently. If those needs live in separate systems, agents inherit the weakest pipe. A support agent may write Postgres, read a stale warehouse, pull embeddings elsewhere, and log somewhere else. Every copy adds delay, inconsistency, cost, and governance risk.",
+        "Lakebase and LTAP are the answer Databricks offers: write transactionally, and make that operational data immediately available to the governed lakehouse where analytics and AI already run."
+      ],
+      "bullets": [
+        "Fresh operational context.",
+        "Historical analytical context.",
+        "Low-latency reads and writes.",
+        "Tool-call state.",
+        "Auditability.",
+        "Feature access for models.",
+        "Governance over both data and actions."
+      ]
+    },
+    {
+      "heading": "What Still Needs Scrutiny",
+      "level": 2,
+      "body": [
+        "The architecture is compelling. It should not be accepted uncritically. Peers already attacked the same problem from other angles."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Latency",
+      "level": 3,
+      "body": [
+        "Purpose-built HTAP may still win for sub-millisecond reads, heavy mixed access in one SQL engine, or tight operational SLAs. SingleStore’s case is that one engine and universal storage can beat coordinating specialized engines through a shared lake."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Consistency",
+      "level": 3,
+      "body": [
+        "TiDB shows row transactions and columnar analytics can coexist without external ETL, using Raft Learners and MVCC for fresh analytical reads. That is not a lakehouse. It weakens any claim that unification was unsolved before Lakebase."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Maturity",
+      "level": 3,
+      "body": [
+        "Lakebase and LTAP are not the same maturity as the older lakehouse stack. Lakebase is documented. LTAP was announced as coming soon with Lakebase. Teams should separate GA, preview, and roadmap."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "No ETL",
+      "level": 3,
+      "body": [
+        "Removing an explicit CDC pipeline matters. Production still needs schema management, access control, tuning, quality checks, backfills, monitoring, and cost control. LTAP may remove a class of pipelines. It does not remove data engineering."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Platform gravity",
+      "level": 3,
+      "body": [
+        "Open formats reduce lock-in. Platforms still create gravity. Delta and Iceberg are open. Postgres compatibility matters. Unity Catalog, Databricks SQL, Lakebase ops, serverless economics, and AI integrations can still make Databricks the control plane. Name that clearly."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "Scope",
+      "level": 3,
+      "body": [
+        "Should all operational data become lakehouse data? For AI-heavy enterprises, increasingly yes. For smaller apps, latency-sensitive systems, or simple SaaS backends, a conventional database plus selective analytics replication may stay simpler."
+      ],
+      "bullets": []
+    },
+    {
+      "heading": "The Real Debate",
+      "level": 2,
+      "body": [
+        "Databricks is trying to move the conversation from which database can do both OLTP and OLAP to where the source of truth should live.",
+        "HTAP answers: in a database engine that handles mixed workloads. The lakehouse answers: in open, governed lake storage, with specialized engines per workload.",
+        "Lakebase makes the second answer more credible by giving the lakehouse a transactional face. LTAP pushes further: one copy of data, one governance layer, one storage foundation for operational and analytical work.",
+        "If that works at production scale, the lakehouse is no longer just a better warehouse or an ML platform. It is where applications, analytics, streaming, and agents operate on the same living data.",
+        "That is the claim worth understanding. Databricks is not merely competing with warehouses. It is challenging the database itself as the default center of enterprise data architecture."
+      ],
+      "bullets": []
+    }
+  ]
+}

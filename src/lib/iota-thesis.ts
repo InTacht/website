@@ -420,7 +420,4 @@ export const close = {
       body: "Provides the distributed infrastructure through which those systems can run and scale.",
     },
   ],
-  ctas: [
-    { label: "IQ Research", href: "/research?from=thesis", variant: "primary" as const },
-  ],
 } as const;

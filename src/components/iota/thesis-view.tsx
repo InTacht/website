@@ -14,7 +14,6 @@ import { DurabilityHero } from "@/components/iota/thesis-graphics/durability";
 import { PrivacyHero } from "@/components/iota/thesis-graphics/privacy";
 import { LearningHero, CloseHero } from "@/components/iota/thesis-graphics/rest";
 import { ThesisMobileRail, ThesisToc } from "@/components/iota/thesis-toc";
-import { CtaLink } from "@/components/ui/cta";
 import {
   boundaries,
   close,
@@ -347,6 +346,7 @@ export function ThesisView() {
     <ThesisClockProvider>
     <main className="pt-24">
       <div className="relative mx-auto max-w-6xl px-8 md:px-14 lg:px-16">
+        <div className="relative">
         <article className="thesis-article min-w-0 max-w-3xl xl:max-w-[42rem]">
           <figure className="relative w-full overflow-hidden">
             <div className="relative aspect-[3/1] w-full bg-[#0A0E1A]">
@@ -641,24 +641,15 @@ export function ThesisView() {
               </p>
               <SystemBeats />
             </div>
-
-            <div className="mt-10 flex flex-wrap items-center gap-3 md:gap-4">
-              {close.ctas.map((cta) => (
-                <CtaLink key={cta.label} href={cta.href} variant={cta.variant}>
-                  {cta.label}
-                </CtaLink>
-              ))}
-            </div>
           </Chapter>
         </article>
 
-        <aside className="pointer-events-none fixed inset-x-0 top-24 z-20 hidden lg:block">
-          <div className="mx-auto max-w-6xl px-8 md:px-14 lg:px-16">
-            <div className="pointer-events-auto ml-auto w-36 xl:w-40">
-              <ThesisToc />
-            </div>
+        <aside className="pointer-events-none absolute inset-y-0 right-0 z-20 hidden w-36 lg:block xl:w-40">
+          <div className="pointer-events-auto sticky top-28 max-h-[calc(100svh-7.5rem)] overflow-y-auto overscroll-contain py-2">
+            <ThesisToc />
           </div>
         </aside>
+        </div>
       </div>
     </main>
     </ThesisClockProvider>

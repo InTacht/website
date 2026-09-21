@@ -8,6 +8,7 @@ import { HeroCards } from "@/components/hero-cards";
 import { HeroCopy } from "@/components/hero-copy";
 import { LandingBackground } from "@/components/landing-background";
 import { PlatformsBento } from "@/components/platforms-bento";
+import { SiteTopBar } from "@/components/site-top-bar";
 import { ctaPrimaryClass, ctaPrimaryStyle } from "@/components/ui/cta";
 import type { Project } from "@/lib/projects";
 
@@ -110,6 +111,8 @@ export function LandingView({ children }: { children?: ReactNode }) {
 
   return (
     <>
+      {view === "hero" ? <SiteTopBar /> : null}
+
       <section ref={heroSectionRef} className="relative h-svh overflow-hidden">
         <LandingBackground />
 

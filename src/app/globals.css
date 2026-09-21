@@ -602,3 +602,26 @@
   }
 }
 
+/* Labs Notion notebook: force site-black instead of Notion gray dark mode. */
+.labs-notion,
+.labs-notion.dark-mode,
+.labs-notion .dark-mode,
+.labs-notion .notion,
+.labs-notion .notion-app,
+.labs-notion .notion-frame,
+.labs-notion .notion-page-scroller,
+.labs-notion .notion-page,
+.labs-notion .notion-page-content {
+  background: #000 !important;
+  background-color: #000 !important;
+}
+
+.labs-notion.dark-mode,
+.labs-notion .dark-mode {
+  --bg-color: #000;
+  --bg-color-0: #111;
+  --bg-color-1: #161616;
+  --bg-color-2: rgba(255, 255, 255, 0.06);
+}
+
+

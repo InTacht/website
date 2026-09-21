@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { SiteShell } from "@/components/site-shell";
 
-export function ResearchShell({ children }: { children: ReactNode }) {
+export function BlogShell({ children }: { children: ReactNode }) {
   return <SiteShell>{children}</SiteShell>;
 }
