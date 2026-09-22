@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { ContactSection } from "@/components/contact-section";
 import { ResearchScrollReset } from "@/components/research/research-scroll-reset";
-import { SiteTopBar } from "@/components/site-top-bar";
 import { SmoothScroll } from "@/components/ui/smooth-scroll";
 
 export function SiteShell({ children }: { children: ReactNode }) {
@@ -9,11 +8,8 @@ export function SiteShell({ children }: { children: ReactNode }) {
     <SmoothScroll>
       <ResearchScrollReset />
       <div className="relative min-h-svh bg-black text-white">
-        <SiteTopBar />
-        <div className="relative z-10">
-          {children}
-          <ContactSection />
-        </div>
+        <div className="relative z-10">{children}</div>
+        <ContactSection />
       </div>
     </SmoothScroll>
   );

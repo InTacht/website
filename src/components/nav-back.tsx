@@ -65,6 +65,9 @@ export function useStoredResearchOrigin(): ResearchOrigin {
   return origin;
 }
 
+const backLinkClass =
+  "shrink-0 text-[11px] font-light uppercase tracking-[0.22em] text-white/45 transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:text-white";
+
 export function ResearchBackLink() {
   const pathname = usePathname();
   const origin = useResearchOrigin();
@@ -74,10 +77,7 @@ export function ResearchBackLink() {
     const href =
       origin === "thesis" ? "/research?from=thesis" : "/research?from=home";
     return (
-      <Link
-        href={href}
-        className="shrink-0 text-[11px] font-light uppercase tracking-[0.22em] text-white/45 transition hover:text-white"
-      >
+      <Link href={href} className={backLinkClass}>
         Back
       </Link>
     );
@@ -86,10 +86,7 @@ export function ResearchBackLink() {
   const href = origin === "thesis" ? "/iota/thesis" : "/";
 
   return (
-    <Link
-      href={href}
-      className="shrink-0 text-[11px] font-light uppercase tracking-[0.22em] text-white/45 transition hover:text-white"
-    >
+    <Link href={href} className={backLinkClass}>
       Back
     </Link>
   );
@@ -97,10 +94,7 @@ export function ResearchBackLink() {
 
 export function BlogBackLink() {
   return (
-    <Link
-      href="/blog"
-      className="shrink-0 text-[11px] font-light uppercase tracking-[0.22em] text-white/45 transition hover:text-white"
-    >
+    <Link href="/blog" className={backLinkClass}>
       Back
     </Link>
   );
@@ -108,10 +102,7 @@ export function BlogBackLink() {
 
 export function ThesisBackLink() {
   return (
-    <Link
-      href="/"
-      className="shrink-0 text-[11px] font-light uppercase tracking-[0.22em] text-white/45 transition hover:text-white"
-    >
+    <Link href="/" className={backLinkClass}>
       Back
     </Link>
   );

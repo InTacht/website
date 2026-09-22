@@ -37,22 +37,18 @@ const THESIS_BANNER_SRC = "/iota-thesis-banner.png";
 const PARTS = [
   {
     label: "The problem",
-    blurb: "Why a single model cannot be the whole of intelligence.",
     ids: ["limitation", "system"],
   },
   {
     label: "The architecture",
-    blurb: "Cortex, profiles, experts, and the router that binds them.",
     ids: ["cortex", "iq-profiles", "experts", "router"],
   },
   {
     label: "The implications",
-    blurb: "Durability, privacy, learning, horizon, uses, and limits.",
     ids: ["durability", "privacy", "learning", "horizon", "uses", "boundaries"],
   },
   {
     label: "The destination",
-    blurb: "Organization-native intelligence and the wider stack.",
     ids: ["close"],
   },
 ] as const;
@@ -104,9 +100,6 @@ function PartGate({ id }: { id: string }) {
           {part.ids.length === 1 ? "chapter" : "chapters"}
         </p>
       </div>
-      <p className="mt-3 max-w-xl text-sm font-light leading-relaxed text-white/40">
-        {part.blurb}
-      </p>
     </div>
   );
 }

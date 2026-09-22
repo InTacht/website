@@ -8,15 +8,17 @@ import { HeroCards } from "@/components/hero-cards";
 import { HeroCopy } from "@/components/hero-copy";
 import { LandingBackground } from "@/components/landing-background";
 import { PlatformsBento } from "@/components/platforms-bento";
-import { SiteTopBar } from "@/components/site-top-bar";
+import { useChrome } from "@/components/chrome-context";
 import { ctaPrimaryClass, ctaPrimaryStyle } from "@/components/ui/cta";
 import type { Project } from "@/lib/projects";
 
-const EXIT_MS = 450;
+const EXIT_MS = 520;
 const MARK_SPIN_MS = 1000;
+const EASE = [0.32, 0.72, 0, 1] as const;
 
 export function LandingView({ children }: { children?: ReactNode }) {
   const [view, setView] = useState<"hero" | "bento">("hero");
+  const { setTopBarHidden } = useChrome();
   const lenis = useLenis();
   const [selectedId, setSelectedId] = useState<Project["id"] | null>(null);
   const [markSpinning, setMarkSpinning] = useState(false);
@@ -44,6 +46,11 @@ export function LandingView({ children }: { children?: ReactNode }) {
     setReleaseOrigin(null);
     if (markTimerRef.current) window.clearTimeout(markTimerRef.current);
   }, [view]);
+
+  useEffect(() => {
+    setTopBarHidden(view === "bento");
+    return () => setTopBarHidden(false);
+  }, [view, setTopBarHidden]);
 
   const releaseButterflies = useCallback((origin: { x: number; y: number }) => {
     if (view !== "hero" || markSpinning) return;
@@ -111,8 +118,6 @@ export function LandingView({ children }: { children?: ReactNode }) {
 
   return (
     <>
-      {view === "hero" ? <SiteTopBar /> : null}
-
       <section ref={heroSectionRef} className="relative h-svh overflow-hidden">
         <LandingBackground />
 
@@ -121,13 +126,16 @@ export function LandingView({ children }: { children?: ReactNode }) {
             <motion.div
               key="hero"
               className="absolute inset-0 z-10"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { duration: EXIT_MS / 1000, ease: EASE },
+              }}
               exit={{
                 opacity: 0,
-                y: -24,
-                transition: {
-                  duration: EXIT_MS / 1000,
-                  ease: [0.22, 1, 0.36, 1],
-                },
+                y: -20,
+                transition: { duration: EXIT_MS / 1000, ease: EASE },
               }}
             >
               <HeroCopy />
@@ -143,13 +151,16 @@ export function LandingView({ children }: { children?: ReactNode }) {
             <motion.div
               key="bento"
               className="absolute inset-0 z-10 flex items-center justify-center px-4 py-10 sm:px-6 md:px-10 md:py-14"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { duration: EXIT_MS / 1000, ease: EASE },
+              }}
               exit={{
                 opacity: 0,
-                y: 24,
-                transition: {
-                  duration: EXIT_MS / 1000,
-                  ease: [0.22, 1, 0.36, 1],
-                },
+                y: 20,
+                transition: { duration: EXIT_MS / 1000, ease: EASE },
               }}
             >
               <button

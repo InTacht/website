@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import { GeistMono } from "geist/font/mono";
+import { SiteTopBar } from "@/components/site-top-bar";
+import { ChromeProvider } from "@/components/chrome-context";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
@@ -32,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${seasonMix.variable} ${GeistMono.variable} min-h-screen font-sans antialiased`}
+        className={`${inter.variable} ${seasonMix.variable} ${GeistMono.variable} min-h-screen overflow-x-hidden font-sans antialiased`}
       >
         <a
           href="#act-1"
@@ -40,7 +42,13 @@ export default function RootLayout({
         >
           Skip to story
         </a>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ChromeProvider>
+            {/* Outside route template so fixed positioning is never broken by page motion. */}
+            <SiteTopBar />
+            {children}
+          </ChromeProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

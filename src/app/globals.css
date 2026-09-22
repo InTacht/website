@@ -624,4 +624,40 @@
   --bg-color-2: rgba(255, 255, 255, 0.06);
 }
 
+/* Soften browser view-transition snapshots when available. */
+@supports (view-transition-name: none) {
+  @media (prefers-reduced-motion: no-preference) {
+    ::view-transition-old(root) {
+      animation: page-vt-out 320ms cubic-bezier(0.32, 0.72, 0, 1) both;
+    }
+    ::view-transition-new(root) {
+      animation: page-vt-in 480ms cubic-bezier(0.32, 0.72, 0, 1) both;
+    }
+  }
+}
+
+@keyframes page-vt-out {
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes page-vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+::view-transition-group(site-header) {
+  animation: none;
+  z-index: 200;
+}
+
+::view-transition-old(site-header),
+::view-transition-new(site-header) {
+  animation: none;
+}
+
 

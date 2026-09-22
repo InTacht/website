@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 export const ctaPrimaryClass =
-  "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-light tracking-wide text-white transition hover:opacity-90 md:px-7 md:text-base glass";
+  "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-light tracking-wide text-white transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:opacity-90 md:px-7 md:text-base glass";
 
 export const ctaPrimaryStyle = {
   background:
@@ -10,7 +10,7 @@ export const ctaPrimaryStyle = {
 } as const;
 
 const ctaSecondaryClass =
-  "inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-sm font-light tracking-wide text-white/70 transition hover:border-white/30 hover:text-white md:px-7 md:text-base";
+  "inline-flex items-center justify-center rounded-full border border-white/15 px-6 py-3 text-sm font-light tracking-wide text-white/70 transition-[color,border-color] duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:border-white/30 hover:text-white md:px-7 md:text-base";
 
 type CtaVariant = "primary" | "secondary";
 
